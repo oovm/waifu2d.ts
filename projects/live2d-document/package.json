@@ -1,12 +1,19 @@
 {
+    "name": "@doki-land/live2d-document",
     "private": true,
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Documentation for Live2D TypeScript runtime",
+    "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "dev": "vitepress dev docs",
+        "build": "vitepress build docs",
+        "preview": "vitepress preview docs"
     },
-    "keywords": [],
+    "keywords": ["live2d", "documentation"],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "@doki-land/live2d": "workspace:*",
+        "@doki-land/live2d-vitepress": "workspace:*"
+    }
 }
