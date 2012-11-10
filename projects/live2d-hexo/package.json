@@ -1,15 +1,26 @@
 {
     "name": "@doki-land/live2d-hexo",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "keywords": ["live2d", "hexo", "plugin"],
+    "description": "Hexo plugin for Live2D models",
+    "author": "Aster <192608617@qq.com>",
+    "license": "LGPL-3.0-or-later",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
     "dependencies": {
-        "pixi-live2d-display": "^0.4.0"
+        "@doki-land/live2d": "workspace:*"
+    },
+    "peerDependencies": {
+        "hexo": "^6.0.0"
     }
 }

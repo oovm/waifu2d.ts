@@ -1,14 +1,17 @@
 {
     "name": "@doki-land/live2d",
     "version": "1.0.0",
+    "keywords": ["live2d", "pixi", "typescript"],
     "description": "Live2D TypeScript runtime based on pixi-live2d-display",
+    "author": "Aster <192608617@qq.com>",
+    "license": "LGPL-3.0-or-later",
     "type": "module",
     "main": "dist/index.umd.js",
-    "module": "dist/index.es.js",
+    "module": "dist/index.esm.js",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/index.es.js",
+            "import": "./dist/index.esm.js",
             "require": "./dist/index.umd.js",
             "types": "./dist/index.d.ts"
         }
@@ -22,14 +25,7 @@
         "build": "vite build && tsc --emitDeclarationOnly",
         "preview": "vite preview"
     },
-    "keywords": ["live2d", "pixi", "typescript"],
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "pixi-live2d-display": "^0.4.0"
-    },
-    "devDependencies": {
-        "typescript": "^5.8.2",
-        "vite": "^6.2.3"
     }
 }
