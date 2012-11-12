@@ -7,44 +7,60 @@ window.PIXI = PIXI;
 // 导出pixi-live2d-display中的核心类型
 export { Live2DModel, MotionManager };
 
-/**
- * Live2D模型配置选项
- */
-export interface Live2DModelOptions {
+
+export interface ModelOptions {
     /**
      * 模型JSON文件的路径
      */
     modelPath: string;
+    desktop?: ModelPosition;
+    mobile?: ModelPosition;
+}
 
+export interface ModelPosition {
     /**
-     * 要渲染到的HTML元素ID
+     * 模型在画布中的缩放
      */
-    elementId: string;
-
+    scale?: number,
+    /**
+     * 模型在画布中的位置
+     */
+    x?: number;
+    /**
+     * 模型在画布中的位置
+     */
+    y?: number;
     /**
      * 画布宽度
      * @default 300
      */
     width?: number;
-
     /**
      * 画布高度
      * @default 300
      */
     height?: number;
+}
 
+/**
+ * Live2D模型配置选项
+ */
+export interface Live2DModelOptions {
+    /**
+     * 要渲染到的HTML元素ID
+     */
+    elementId: string;
+    models: ModelOptions[];
     /**
      * 是否自动适应模型大小
      * @default true
      */
     autoFit?: boolean;
-
     /**
      * 是否自动开始动画
      * @default true
      */
     autoMotion?: boolean;
-
     /**
      * 是否启用鼠标跟踪
      * @default true
@@ -59,10 +75,8 @@ export interface Live2DModelOptions {
  */
 export async function createLive2DModel(options: Live2DModelOptions): Promise<Live2DModel> {
     const {
-        modelPath,
+        models,
         elementId,
-        width = 300,
-        height = 300,
         autoFit = true,
         autoMotion = true,
         mouseTracking = true
@@ -71,15 +85,15 @@ export async function createLive2DModel(options: Live2DModelOptions): Promise<Li
     // 初始化PIXI应用
     const app = new PIXI.Application({
         view: document.getElementById(elementId) as HTMLCanvasElement,
-        width,
-        height,
+        width: 300,
+        height: 300,
         backgroundAlpha: 0,
         autoDensity: true,
         antialias: true
     });
 
     // 加载模型
-    const model = await Live2DModel.from(modelPath);
+    const model = await Live2DModel.from(models[0]);
 
     // 添加模型到舞台
     app.stage.addChild(model);
@@ -101,7 +115,7 @@ export async function createLive2DModel(options: Live2DModelOptions): Promise<Li
 
     // 自动开始动画
     if (autoMotion) {
-        startIdleAnimation(model);
+        await startIdleAnimation(model);
     }
 
     return model;
