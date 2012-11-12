@@ -51,7 +51,7 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
     console.log('Live2D is disabled on mobile devices');
   } else {
     // 动态导入Live2D核心库
-    import('https://cdn.jsdelivr.net/npm/@doki-land/live2d/dist/index.es.js')
+    import('https://cdn.jsdelivr.net/npm/@doki-land/live2d/dist/index.esm.js')
       .then(({ createLive2DModel }) => {
         // 创建Live2D容器
         const container = document.createElement('div');
@@ -115,3 +115,7 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
                     data: () => fs.createReadStream(filePath)
                 };
             }
+        });
+    }
+}
+

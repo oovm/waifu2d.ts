@@ -21,6 +21,6 @@
         "@doki-land/live2d": "workspace:*"
     },
     "peerDependencies": {
-        "vuepress": "^2.0.0"
+        "vuepress": "^1.9.0"
     }
 }
