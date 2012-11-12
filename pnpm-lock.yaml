@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       hexo:
-        specifier: ^6.0.0
-        version: 6.3.0(chokidar@3.6.0)
+        specifier: ^7.0.0
+        version: 7.3.0(chokidar@3.6.0)
       sass:
         specifier: ^1.86.0
         version: 1.86.0
@@ -29,9 +29,15 @@ importers:
 
   projects/live2d-core:
     dependencies:
+      pixi:
+        specifier: ^0.3.1
+        version: 0.3.1
       pixi-live2d-display:
         specifier: ^0.4.0
         version: 0.4.0(76g3zz2nt7dtjnktvdvk76m2oe)
+      pixi.js:
+        specifier: ^8.9.1
+        version: 8.9.1
 
   projects/live2d-document:
     dependencies:
@@ -1204,6 +1210,9 @@ packages:
     resolution: {integrity: sha512-dfUnCxiN9H4ap84DvD2ubjw+3vUNpstxa0TneY/Paat8a3R4uQZDLSvWjmznAY/DoahqTHl9V46HF/Zs3F29pg==}
     engines: {node: '>= 10.0.0'}
 
+  '@pixi/colord@2.9.6':
+    resolution: {integrity: sha512-nezytU2pw587fQstUu1AsJZDVEynjskwOL+kibwcdxsMBFqPsFFNA7xl0ii/gXuDi6M0xj3mfRJj8pBSc2jCfA==}
+
   '@pixi/constants@6.5.10':
     resolution: {integrity: sha512-PUF2Y9YISRu5eVrVVHhHCWpc/KmxQTg3UH8rIUs8UI9dCK41/wsPd3pEahzf7H47v7x1HCohVZcFO3XQc1bUDw==}
 
@@ -1391,6 +1400,9 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
+
+  '@types/css-font-loading-module@0.0.12':
+    resolution: {integrity: sha512-x2tZZYkSxXqWvTDgveSynfjq/T2HyiZHXb00j/+gy19yp70PHCizM48XFdjBCWH7eHBD0R5i/pw9yMBP/BH5uA==}
 
   '@types/earcut@2.1.4':
     resolution: {integrity: sha512-qp3m9PPz4gULB9MhjGID7wpo3gJ4bTGXm7ltNDsmOvsPduTeHp8wSW9YckBj3mljeOh4F0m2z/0JKAALRKbmLQ==}
@@ -1750,6 +1762,13 @@ packages:
 
   '@webassemblyjs/wast-printer@1.9.0':
     resolution: {integrity: sha512-2J0nE95rHXHyQ24cWjMKJ1tqB/ds8z/cyeOZxJhcb+rW+SQASVjuznUSmdz5GpVJTzU8JkhYut0D3siFDD6wsA==}
+
+  '@webgpu/types@0.1.60':
+    resolution: {integrity: sha512-8B/tdfRFKdrnejqmvq95ogp8tf52oZ51p3f4QD5m5Paey/qlX4Rhhy5Y8tgFMi7Ms70HzcMMw3EQjH/jdhTwlA==}
+
+  '@xmldom/xmldom@0.8.10':
+    resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
+    engines: {node: '>=10.0.0'}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -3166,6 +3185,9 @@ packages:
   eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
 
+  eventemitter3@5.0.1:
+    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+
   events@1.1.1:
     resolution: {integrity: sha512-kEcvvCBByWXGnZy6JUlgAp2gBIUjfCAV6P6TgT1/aaQKcmuAEC4OZTV1I4EWQLz2gxZw76atuVyvHhTxvi0Flw==}
     engines: {node: '>=0.4.x'}
@@ -3414,6 +3436,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  gifuct-js@2.1.2:
+    resolution: {integrity: sha512-rI2asw77u0mGgwhV3qA+OEgYqaDn5UNqgs+Bx0FGwSpuqfYn+Ir6RQY5ENNQ8SbIiG/m5gVa7CD5RriO4f4Lsg==}
+
   glob-parent@3.1.0:
     resolution: {integrity: sha512-E8Ak/2+dZY6fnzlR7+ueWvhsH1SjHr4jjss4YS/h4py44jY9MhK/VFdaZJAWDz6BbL21KeteKxFSFpq8OS5gVA==}
 
@@ -3581,6 +3606,10 @@ packages:
     resolution: {integrity: sha512-hSQTPUmB/BCe1BFYmXRkPyLk8rqbBqHCQq+rjwwOJuEfOADrFaVK2VPZb90tJzPyXE1xSxpgCxE/AZq0CyTVwg==}
     engines: {node: '>=12.13.0'}
 
+  hexo-front-matter@4.2.1:
+    resolution: {integrity: sha512-sJJI0GNmejYiwBvgnGRKn5V3sbODB4dNPr8jyw2Qp0PRHr4Uuyv8iyxw6WfK3+T7yvzYvJOh+tZ7jnwr2BYARA==}
+    engines: {node: '>=14'}
+
   hexo-fs@3.1.0:
     resolution: {integrity: sha512-SfoDH7zlU9Iop+bAfEONXezbNIkpVX1QqjNCBYpapilZR+xVOCfTEdlNixanrKBbLGPb2fXqrdDBFgrKuiVGQQ==}
     engines: {node: '>=10.13.0'}
@@ -3592,6 +3621,10 @@ packages:
   hexo-i18n@1.0.0:
     resolution: {integrity: sha512-yw90JHr7ybUHN/QOkpHmlWJj1luVk5/v8CUU5NRA0n4TFp6av8NT7ujZ10GDawgnQEdMHnN5PUfAbNIVGR6axg==}
     engines: {node: '>=8.6.0'}
+
+  hexo-i18n@2.0.0:
+    resolution: {integrity: sha512-dkUXecEtChaQMdTHN4WR13c8GwKqjbSOZPJS9qDqV6Ebnb77Wa/nQzWFckhP0dCps3a9lUQBd8hYGOMbOosiQQ==}
+    engines: {node: '>=14'}
 
   hexo-log@3.2.0:
     resolution: {integrity: sha512-fk7jOW3hvKiAv4Q/d8UxaQlARwcv+5KjGcnxexUrqBqyWbMCLmw7jhMHTSRLNNQpaoTlF5ff+kQkPi4yhp9iag==}
@@ -3612,6 +3645,11 @@ packages:
   hexo@6.3.0:
     resolution: {integrity: sha512-4Jq+rWd8sYvR1YdIQyndN/9WboQ/Mqm6eax8CjrjO+ePFm2oMVafSOx9WEyJ42wcLOHjfyMfnlQhnUuNmJIpPg==}
     engines: {node: '>=12.13.0'}
+    hasBin: true
+
+  hexo@7.3.0:
+    resolution: {integrity: sha512-dOe8mzBKrvjubW5oBmyhcnQDpC+M2xmAMLae5K+o+SkHxyvAhShkS2VQZoTsOLIJKY6xilv7dzCjCvE7ol/NHQ==}
+    engines: {node: '>=14'}
     hasBin: true
 
   highlight.js@11.9.0:
@@ -4047,6 +4085,9 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
+  ismobilejs@1.1.1:
+    resolution: {integrity: sha512-VaFW53yt8QO61k2WJui0dHf4SlL8lxBofUuUmwBo0ljPk0Drz2TiuDW4jo3wDcv41qy/SxrJ+VAzJ/qYqsmzRw==}
+
   isobject@2.1.0:
     resolution: {integrity: sha512-+OUdGJlgjOBZDfxnDjYYG6zp487z0JGNQq3cYQYg5f5hKR+syHMsaztzGeml/4kGG55CSpKSpWTY+jYGgsHLgA==}
     engines: {node: '>=0.10.0'}
@@ -4063,6 +4104,9 @@ packages:
 
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
+
+  js-binary-schema-parser@2.0.3:
+    resolution: {integrity: sha512-xezGJmOb4lk/M1ZZLTR/jaBHQ4gG/lqQnJqdIv4721DMggsa1bDVlHXNeHYogaIEHD9vCRv0fcL4hMA+Coarkg==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -4688,6 +4732,9 @@ packages:
     resolution: {integrity: sha512-aOIos8bujGN93/8Ox/jPLh7RwVnPEysynVFE+fQZyg6jKELEHwzgKdLRFHUgXJL6kylijVSBC4BvN9OmsB48Rw==}
     engines: {node: '>=4'}
 
+  parse-svg-path@0.1.2:
+    resolution: {integrity: sha512-JyPSBnkTJ0AI8GGJLfMXvKq42cj5c006fnLz6fXy6zfoVjJizi8BNTpu8on8ziI1cKy9d9DGNuY17Ce7wuejpQ==}
+
   parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
     engines: {node: '>= 0.8'}
@@ -4787,6 +4834,13 @@ packages:
       '@pixi/math': ^6
       '@pixi/sprite': ^6
       '@pixi/utils': ^6
+
+  pixi.js@8.9.1:
+    resolution: {integrity: sha512-2vF5Yu9WC/83ly2tCGkjb+ZGnrr+vlKtZezmD0AmJEQoYZO5nL94806l+PVcJBKW6qrF0YHtbh0ubb6CB7/8Rg==}
+
+  pixi@0.3.1:
+    resolution: {integrity: sha512-9ngEid+Zp6WTSnHnfy3+PX/02HXhJ3RMxolpuf7H4e8cKHl9WE3lB059v0O7op55We92ILAssAWSAQHG64cYhQ==}
+    deprecated: please use the new pixi.js package instead
 
   pkg-dir@3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
@@ -5497,6 +5551,9 @@ packages:
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
+  sprintf-js@1.1.3:
+    resolution: {integrity: sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==}
+
   sshpk@1.18.0:
     resolution: {integrity: sha512-2p2KJZTSqQ/I3+HX42EpYOa2l3f8Erv8MWKsy2I9uf4wA7yFIkXRffYdsx86y6z4vHtV8u7g+pPlr8/4ouAxsQ==}
     engines: {node: '>=0.10.0'}
@@ -6114,6 +6171,10 @@ packages:
   warehouse@4.0.2:
     resolution: {integrity: sha512-GixS7SolBGu81rnxYM6bScxdElLM97Jx/kr0a6B6PGBWFqvHeuWFj7QbgEX1YWZSxiJt/aR6dBVQKC/PvvihdQ==}
     engines: {node: '>=10.13.0'}
+
+  warehouse@5.0.1:
+    resolution: {integrity: sha512-5BQEQP56bPY+cqocTho4syazuGgSoyKd0y3PsS2j8tGN10HH+CEfJSIY+KUw9D0k4jaVEFMXLz0KqCiUzTYb8A==}
+    engines: {node: '>=14'}
 
   watchpack-chokidar2@2.0.1:
     resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
@@ -7444,6 +7505,8 @@ snapshots:
       '@parcel/watcher-win32-x64': 2.5.1
     optional: true
 
+  '@pixi/colord@2.9.6': {}
+
   '@pixi/constants@6.5.10': {}
 
   '@pixi/core@6.5.10(@pixi/constants@6.5.10)(@pixi/extensions@6.5.10)(@pixi/math@6.5.10)(@pixi/runner@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))(@pixi/ticker@6.5.10(@pixi/extensions@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10)))(@pixi/utils@6.5.10(@pixi/constants@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10)))':
@@ -7588,6 +7651,8 @@ snapshots:
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 20.12.11
+
+  '@types/css-font-loading-module@0.0.12': {}
 
   '@types/earcut@2.1.4': {}
 
@@ -8296,6 +8361,10 @@ snapshots:
       '@webassemblyjs/ast': 1.9.0
       '@webassemblyjs/wast-parser': 1.9.0
       '@xtuc/long': 4.2.2
+
+  '@webgpu/types@0.1.60': {}
+
+  '@xmldom/xmldom@0.8.10': {}
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -9842,6 +9911,8 @@ snapshots:
 
   eventemitter3@4.0.7: {}
 
+  eventemitter3@5.0.1: {}
+
   events@1.1.1: {}
 
   events@3.3.0: {}
@@ -10173,6 +10244,10 @@ snapshots:
       fs-extra: 8.1.0
       globby: 6.1.0
 
+  gifuct-js@2.1.2:
+    dependencies:
+      js-binary-schema-parser: 2.0.3
+
   glob-parent@3.1.0:
     dependencies:
       is-glob: 3.1.0
@@ -10369,6 +10444,10 @@ snapshots:
     dependencies:
       js-yaml: 4.1.0
 
+  hexo-front-matter@4.2.1:
+    dependencies:
+      js-yaml: 4.1.0
+
   hexo-fs@3.1.0:
     dependencies:
       bluebird: 3.7.2
@@ -10386,6 +10465,10 @@ snapshots:
   hexo-i18n@1.0.0:
     dependencies:
       sprintf-js: 1.0.3
+
+  hexo-i18n@2.0.0:
+    dependencies:
+      sprintf-js: 1.1.3
 
   hexo-log@3.2.0:
     dependencies:
@@ -10442,6 +10525,35 @@ snapshots:
       tildify: 2.0.0
       titlecase: 1.1.3
       warehouse: 4.0.2
+    transitivePeerDependencies:
+      - chokidar
+
+  hexo@7.3.0(chokidar@3.6.0):
+    dependencies:
+      abbrev: 2.0.0
+      archy: 1.0.0
+      bluebird: 3.7.2
+      hexo-cli: 4.3.2
+      hexo-front-matter: 4.2.1
+      hexo-fs: 4.1.3
+      hexo-i18n: 2.0.0
+      hexo-log: 4.1.0
+      hexo-util: 3.3.0
+      js-yaml: 4.1.0
+      js-yaml-js-types: 1.0.1(js-yaml@4.1.0)
+      micromatch: 4.0.5
+      moize: 6.1.6
+      moment: 2.30.1
+      moment-timezone: 0.5.48
+      nunjucks: 3.2.4(chokidar@3.6.0)
+      picocolors: 1.1.1
+      pretty-hrtime: 1.0.3
+      resolve: 1.22.8
+      strip-ansi: 6.0.1
+      text-table: 0.2.0
+      tildify: 2.0.0
+      titlecase: 1.1.3
+      warehouse: 5.0.1
     transitivePeerDependencies:
       - chokidar
 
@@ -10873,6 +10985,8 @@ snapshots:
 
   isexe@2.0.0: {}
 
+  ismobilejs@1.1.1: {}
+
   isobject@2.1.0:
     dependencies:
       isarray: 1.0.0
@@ -10884,6 +10998,8 @@ snapshots:
   javascript-stringify@1.6.0: {}
 
   javascript-stringify@2.1.0: {}
+
+  js-binary-schema-parser@2.0.3: {}
 
   js-tokens@4.0.0: {}
 
@@ -11519,6 +11635,8 @@ snapshots:
       error-ex: 1.3.2
       json-parse-better-errors: 1.0.2
 
+  parse-svg-path@0.1.2: {}
+
   parseurl@1.3.3: {}
 
   pascal-case@3.1.2:
@@ -11591,6 +11709,21 @@ snapshots:
       '@pixi/sprite': 6.5.10(@pixi/constants@6.5.10)(@pixi/core@6.5.10(@pixi/constants@6.5.10)(@pixi/extensions@6.5.10)(@pixi/math@6.5.10)(@pixi/runner@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))(@pixi/ticker@6.5.10(@pixi/extensions@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10)))(@pixi/utils@6.5.10(@pixi/constants@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))))(@pixi/display@6.5.10(@pixi/constants@6.5.10)(@pixi/math@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))(@pixi/utils@6.5.10(@pixi/constants@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))))(@pixi/math@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))(@pixi/utils@6.5.10(@pixi/constants@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10)))
       '@pixi/utils': 6.5.10(@pixi/constants@6.5.10)(@pixi/settings@6.5.10(@pixi/constants@6.5.10))
       gh-pages: 4.0.0
+
+  pixi.js@8.9.1:
+    dependencies:
+      '@pixi/colord': 2.9.6
+      '@types/css-font-loading-module': 0.0.12
+      '@types/earcut': 2.1.4
+      '@webgpu/types': 0.1.60
+      '@xmldom/xmldom': 0.8.10
+      earcut: 2.2.4
+      eventemitter3: 5.0.1
+      gifuct-js: 2.1.2
+      ismobilejs: 1.1.1
+      parse-svg-path: 0.1.2
+
+  pixi@0.3.1: {}
 
   pkg-dir@3.0.0:
     dependencies:
@@ -12497,6 +12630,8 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
+  sprintf-js@1.1.3: {}
+
   sshpk@1.18.0:
     dependencies:
       asn1: 0.2.6
@@ -13283,6 +13418,17 @@ snapshots:
       cuid: 2.1.8
       graceful-fs: 4.2.11
       hexo-log: 3.2.0
+      is-plain-object: 5.0.0
+      jsonparse: 1.3.1
+      rfdc: 1.3.1
+      through2: 4.0.2
+
+  warehouse@5.0.1:
+    dependencies:
+      bluebird: 3.7.2
+      cuid: 2.1.8
+      graceful-fs: 4.2.11
+      hexo-log: 4.1.0
       is-plain-object: 5.0.0
       jsonparse: 1.3.1
       rfdc: 1.3.1

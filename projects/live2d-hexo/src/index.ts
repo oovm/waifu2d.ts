@@ -115,7 +115,11 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
                     data: () => fs.createReadStream(filePath)
                 };
             }
-        });
-    }
+            return null;
+        }).filter(Boolean);
+    });
 }
+
+// 导出插件函数
+export default hexoLive2DPlugin;
 

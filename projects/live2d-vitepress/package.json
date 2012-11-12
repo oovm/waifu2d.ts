@@ -19,9 +19,9 @@
     },
     "dependencies": {
         "@doki-land/live2d": "workspace:*",
-        "@doki-land/live2d-vite": "workspace:*"
     },
     "peerDependencies": {
         "vitepress": "^1.0.0"
     }
 }
+
