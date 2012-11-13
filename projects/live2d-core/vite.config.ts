@@ -9,6 +9,21 @@ export default defineConfig({
             fileName: (format) => `index.${format}.js`,
             formats: ['es', 'umd']
         },
+        minify: true,
+        rollupOptions: {
+            output: [
+                {
+                    format: 'es',
+                    // 将ESM输出配置为单个文件而非多个文件
+                    preserveModules: false
+                },
+                {
+                    format: 'umd',
+                    // 确保UMD输出是最小化的
+                    compact: true
+                }
+            ]
+        }
     },
     resolve: {
         alias: {

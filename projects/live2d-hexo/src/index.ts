@@ -1,21 +1,14 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-export interface Live2DHexoPluginOptions {
+import { Live2DModelOptions } from '@doki-land/live2d';
+
+export interface Live2DHexoPluginOptions extends Live2DModelOptions {
     /**
      * Live2D模型文件的目录路径
      * @default 'source/live2d'
      */
     modelsDir?: string;
-
-    /**
-     * 模型配置选项
-     */
-    modelOptions?: {
-        width?: number;
-        height?: number;
-        autoFit?: boolean;
-    };
 
     /**
      * 是否在移动设备上显示
@@ -51,7 +44,7 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
     console.log('Live2D is disabled on mobile devices');
   } else {
     // 动态导入Live2D核心库
-    import('https://cdn.jsdelivr.net/npm/@doki-land/live2d/dist/index.esm.js')
+    import('https://cdn.jsdelivr.net/npm/@doki-land/live2d/dist/index.es.js')
       .then(({ createLive2DModel }) => {
         // 创建Live2D容器
         const container = document.createElement('div');

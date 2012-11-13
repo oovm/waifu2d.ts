@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.13.14
+      tsc:
+        specifier: ^2.0.4
+        version: 2.0.4
     devDependencies:
       hexo:
         specifier: ^7.0.0
@@ -19,19 +26,16 @@ importers:
         version: 5.8.2
       vite:
         specifier: ^6.2.3
-        version: 6.2.3(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8)
+        version: 6.2.3(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8)
       vitepress:
         specifier: ^1.0.0
-        version: 1.1.4(@algolia/client-search@4.22.1)(@types/node@20.12.11)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2)
+        version: 1.1.4(@algolia/client-search@4.22.1)(@types/node@22.13.14)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2)
       vuepress:
         specifier: ^1.9.10
         version: 1.9.10(@vue/compiler-sfc@3.4.27)(hogan.js@3.0.2)(lodash@4.17.21)(nunjucks@3.2.4(chokidar@3.6.0))
 
   projects/live2d-core:
     dependencies:
-      pixi:
-        specifier: ^0.3.1
-        version: 0.3.1
       pixi-live2d-display:
         specifier: ^0.4.0
         version: 0.4.0(76g3zz2nt7dtjnktvdvk76m2oe)
@@ -64,19 +68,16 @@ importers:
         version: link:../live2d-core
       vite:
         specifier: ^6.0.0
-        version: 6.2.3(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8)
+        version: 6.2.3(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8)
 
   projects/live2d-vitepress:
     dependencies:
       '@doki-land/live2d':
         specifier: workspace:*
         version: link:../live2d-core
-      '@doki-land/live2d-vite':
-        specifier: workspace:*
-        version: link:../live2d-vite
       vitepress:
         specifier: ^1.0.0
-        version: 1.1.4(@algolia/client-search@4.22.1)(@types/node@20.12.11)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2)
+        version: 1.1.4(@algolia/client-search@4.22.1)(@types/node@22.13.14)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2)
 
   projects/live2d-vuepress:
     dependencies:
@@ -1452,8 +1453,8 @@ packages:
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
-  '@types/node@20.12.11':
-    resolution: {integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==}
+  '@types/node@22.13.14':
+    resolution: {integrity: sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w==}
 
   '@types/offscreencanvas@2019.7.3':
     resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
@@ -4838,10 +4839,6 @@ packages:
   pixi.js@8.9.1:
     resolution: {integrity: sha512-2vF5Yu9WC/83ly2tCGkjb+ZGnrr+vlKtZezmD0AmJEQoYZO5nL94806l+PVcJBKW6qrF0YHtbh0ubb6CB7/8Rg==}
 
-  pixi@0.3.1:
-    resolution: {integrity: sha512-9ngEid+Zp6WTSnHnfy3+PX/02HXhJ3RMxolpuf7H4e8cKHl9WE3lB059v0O7op55We92ILAssAWSAQHG64cYhQ==}
-    deprecated: please use the new pixi.js package instead
-
   pkg-dir@3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
     engines: {node: '>=6'}
@@ -5797,6 +5794,10 @@ packages:
     resolution: {integrity: sha512-pkonvlKk8/ZuR0D5tLW8ljt5I8kmxp2XKymhepUeOdCEfKpZaktSArkLHZt76OB1ZvO9bssUsDty4SWhLvZpLg==}
     engines: {node: '>=0.10.0'}
 
+  tsc@2.0.4:
+    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
+    hasBin: true
+
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -5860,8 +5861,8 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
     resolution: {integrity: sha512-dA8WbNeb2a6oQzAQ55YlT5vQAWGV9WXOsi3SskE3bcCdM0P4SDd+24zS/OCacdRq5BkdsRj9q3Pg6YyQoxIGqg==}
@@ -7641,16 +7642,16 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
       '@types/express-serve-static-core': 5.0.6
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/css-font-loading-module@0.0.12': {}
 
@@ -7660,7 +7661,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -7674,7 +7675,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/highlight.js@9.12.4': {}
 
@@ -7682,13 +7683,13 @@ snapshots:
 
   '@types/http-proxy@1.17.16':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/json-schema@7.0.15': {}
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/linkify-it@5.0.0': {}
 
@@ -7710,9 +7711,9 @@ snapshots:
 
   '@types/minimatch@5.1.2': {}
 
-  '@types/node@20.12.11':
+  '@types/node@22.13.14':
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 6.20.0
 
   '@types/offscreencanvas@2019.7.3': {}
 
@@ -7724,17 +7725,17 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       '@types/send': 0.17.4
 
   '@types/source-list-map@0.1.6': {}
@@ -7759,22 +7760,22 @@ snapshots:
 
   '@types/webpack-sources@3.2.3':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       '@types/source-list-map': 0.1.6
       source-map: 0.7.4
 
   '@types/webpack@4.41.40':
     dependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       '@types/tapable': 1.0.12
       '@types/uglify-js': 3.17.5
       '@types/webpack-sources': 3.2.3
       anymatch: 3.1.3
       source-map: 0.6.1
 
-  '@vitejs/plugin-vue@5.0.4(vite@5.2.11(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8))(vue@3.4.27(typescript@5.8.2))':
+  '@vitejs/plugin-vue@5.0.4(vite@5.2.11(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8))(vue@3.4.27(typescript@5.8.2))':
     dependencies:
-      vite: 5.2.11(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8)
+      vite: 5.2.11(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8)
       vue: 3.4.27(typescript@5.8.2)
 
   '@vue/babel-helper-vue-jsx-merge-props@1.4.0': {}
@@ -11723,8 +11724,6 @@ snapshots:
       ismobilejs: 1.1.1
       parse-svg-path: 0.1.2
 
-  pixi@0.3.1: {}
-
   pkg-dir@3.0.0:
     dependencies:
       find-up: 3.0.0
@@ -12910,6 +12909,8 @@ snapshots:
     dependencies:
       escape-string-regexp: 1.0.5
 
+  tsc@2.0.4: {}
+
   tslib@2.6.2: {}
 
   tty-browserify@0.0.0: {}
@@ -12984,7 +12985,7 @@ snapshots:
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
 
-  undici-types@5.26.5: {}
+  undici-types@6.20.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -13132,36 +13133,36 @@ snapshots:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
 
-  vite@5.2.11(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8):
+  vite@5.2.11(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.5.3
       rollup: 4.37.0
     optionalDependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       fsevents: 2.3.3
       sass: 1.86.0
       stylus: 0.54.8
 
-  vite@6.2.3(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8):
+  vite@6.2.3(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
       rollup: 4.37.0
     optionalDependencies:
-      '@types/node': 20.12.11
+      '@types/node': 22.13.14
       fsevents: 2.3.3
       sass: 1.86.0
       stylus: 0.54.8
 
-  vitepress@1.1.4(@algolia/client-search@4.22.1)(@types/node@20.12.11)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2):
+  vitepress@1.1.4(@algolia/client-search@4.22.1)(@types/node@22.13.14)(async-validator@4.2.5)(fuse.js@6.6.2)(nprogress@0.2.0)(postcss@8.5.3)(sass@1.86.0)(search-insights@2.13.0)(stylus@0.54.8)(typescript@5.8.2):
     dependencies:
       '@docsearch/css': 3.6.0
       '@docsearch/js': 3.6.0(@algolia/client-search@4.22.1)(search-insights@2.13.0)
       '@shikijs/core': 1.4.0
       '@shikijs/transformers': 1.4.0
       '@types/markdown-it': 14.1.1
-      '@vitejs/plugin-vue': 5.0.4(vite@5.2.11(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8))(vue@3.4.27(typescript@5.8.2))
+      '@vitejs/plugin-vue': 5.0.4(vite@5.2.11(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8))(vue@3.4.27(typescript@5.8.2))
       '@vue/devtools-api': 7.1.3(vue@3.4.27(typescript@5.8.2))
       '@vueuse/core': 10.9.0(vue@3.4.27(typescript@5.8.2))
       '@vueuse/integrations': 10.9.0(async-validator@4.2.5)(focus-trap@7.5.4)(fuse.js@6.6.2)(nprogress@0.2.0)(vue@3.4.27(typescript@5.8.2))
@@ -13169,7 +13170,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 6.3.0
       shiki: 1.4.0
-      vite: 5.2.11(@types/node@20.12.11)(sass@1.86.0)(stylus@0.54.8)
+      vite: 5.2.11(@types/node@22.13.14)(sass@1.86.0)(stylus@0.54.8)
       vue: 3.4.27(typescript@5.8.2)
     optionalDependencies:
       postcss: 8.5.3

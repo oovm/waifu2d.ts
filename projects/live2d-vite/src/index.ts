@@ -1,9 +1,8 @@
 import type { Plugin, ResolvedConfig } from 'vite';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Live2DModelOptions } from '@doki-land/live2d/src';
 
-export interface Live2DVitePluginOptions  {
+export interface Live2DVitePluginOptions extends Live2DModelOptions {
     /**
      * Live2D模型文件的目录路径
      * @default 'public/live2d'
@@ -15,16 +14,6 @@ export interface Live2DVitePluginOptions  {
      * @default true
      */
     autoInject?: boolean;
-
-    /**
-     * 模型配置选项
-     */
-    modelOptions?: {
-        width?: number;
-        height?: number;
-        autoFit?: boolean;
-        mouseTracking?: boolean;
-    };
 
     /**
      * 是否在移动设备上显示

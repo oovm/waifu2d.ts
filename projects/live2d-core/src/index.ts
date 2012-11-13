@@ -1,79 +1,17 @@
 import { Live2DModel, MotionManager } from 'pixi-live2d-display';
 import * as PIXI from 'pixi.js';
+import { Live2dOptions } from './types';
 
-// 确保Live2D命名空间可用
-window.PIXI = PIXI;
+export * from './types';
+export { Live2DModel, MotionManager, PIXI };
 
-// 导出pixi-live2d-display中的核心类型
-export { Live2DModel, MotionManager };
-
-
-export interface ModelOptions {
-    /**
-     * 模型JSON文件的路径
-     */
-    modelPath: string;
-    desktop?: ModelPosition;
-    mobile?: ModelPosition;
-}
-
-export interface ModelPosition {
-    /**
-     * 模型在画布中的缩放
-     */
-    scale?: number,
-    /**
-     * 模型在画布中的位置
-     */
-    x?: number;
-    /**
-     * 模型在画布中的位置
-     */
-    y?: number;
-    /**
-     * 画布宽度
-     * @default 300
-     */
-    width?: number;
-    /**
-     * 画布高度
-     * @default 300
-     */
-    height?: number;
-}
-
-/**
- * Live2D模型配置选项
- */
-export interface Live2DModelOptions {
-    /**
-     * 要渲染到的HTML元素ID
-     */
-    elementId: string;
-    models: ModelOptions[];
-    /**
-     * 是否自动适应模型大小
-     * @default true
-     */
-    autoFit?: boolean;
-    /**
-     * 是否自动开始动画
-     * @default true
-     */
-    autoMotion?: boolean;
-    /**
-     * 是否启用鼠标跟踪
-     * @default true
-     */
-    mouseTracking?: boolean;
-}
 
 /**
  * 创建Live2D模型
  * @param options 模型配置选项
  * @returns Promise<Live2DModel> 加载完成的Live2D模型实例
  */
-export async function createLive2DModel(options: Live2DModelOptions): Promise<Live2DModel> {
+export async function createLive2dModel(options: Live2dOptions): Promise<Live2DModel> {
     const {
         models,
         elementId,
@@ -177,14 +115,17 @@ async function startIdleAnimation(model: Live2DModel) {
 /**
  * 加载Cubism SDK
  * 在使用Live2D功能前必须调用此函数
+ * @param cubismCore 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
  */
-export async function initLive2D() {
+export async function initLive2D(cubismCore?: any) {
     // 设置Cubism SDK的路径
     Live2DModel.registerTicker(PIXI.Ticker);
 
     // 注册Cubism SDK
-    if (window.Live2DCubismCore) {
+    if (typeof window !== 'undefined' && window.Live2DCubismCore) {
         Live2DModel.registerCubismCore(window.Live2DCubismCore);
+    } else if (cubismCore) {
+        Live2DModel.registerCubismCore(cubismCore);
     } else {
         console.warn('Live2DCubismCore is not loaded. Please include the Cubism SDK.');
     }
@@ -192,8 +133,8 @@ export async function initLive2D() {
 
 // 导出默认对象
 export default {
-    createLive2DModel,
+    createLive2DModel: createLive2dModel,
     initLive2D,
     Live2DModel,
-    MotionPreset
+    MotionManager
 };

@@ -1,12 +1,8 @@
 import type { Theme } from 'vitepress';
-import live2dVitePlugin, { Live2DVitePluginOptions } from '@doki-land/live2d-vite';
-import { Live2DModelOptions } from '@doki-land/live2d/src';
+import type { Live2DModelOptions } from '@doki-land/live2d';
+// 在运行时动态导入，避免编译时的导入问题
 
-
-
-
-
-export interface Live2DVitePressPluginOptions extends Live2DVitePluginOptions {
+export interface Live2DVitePressPluginOptions extends Live2DModelOptions {
     /**
      * 是否在所有页面上显示Live2D模型
      * @default true
@@ -36,15 +32,23 @@ export default function live2dVitePressPlugin(options: Live2DVitePressPluginOpti
         enableOnAllPages = true,
         includePaths = [],
         excludePaths = [],
-        ...vitePluginOptions
+        modelsDir = 'public/live2d',
+        showOnMobile = false,
+        ...modelOptions
+    }: {
+        enableOnAllPages?: boolean;
+        includePaths?: string[];
+        excludePaths?: string[];
+        modelsDir?: string;
+        showOnMobile?: boolean;
+        [key: string]: any;
     } = options;
 
     // 创建Vite插件
-    const vitePlugin = live2dVitePlugin({
-        ...vitePluginOptions,
-        // 禁用自动注入，由VitePress主题扩展来控制
-        autoInject: false
-    });
+    const vitePlugin = {
+        name: 'vitepress-plugin-live2d',
+        // 这里可以添加Vite插件的配置，如果需要的话
+    };
 
     // 创建VitePress主题扩展
     const themePlugin: Theme = {
@@ -71,7 +75,7 @@ export default function live2dVitePressPlugin(options: Live2DVitePressPluginOpti
                     // 如果应该显示且尚未创建容器，则创建Live2D模型
                     if (shouldShow) {
                         // 动态导入Live2D核心库
-                        import('@doki-land/live2d').then(({
+                        import('@doki-land/live2d/dist/index.js').then(({
                                                               createLive2DModel,
                                                               initLive2D
                                                           }) => {
@@ -89,18 +93,18 @@ export default function live2dVitePressPlugin(options: Live2DVitePressPluginOpti
                                 // 创建Canvas元素
                                 const canvas = document.createElement('canvas');
                                 canvas.id = 'live2d-canvas';
-                                canvas.width = vitePluginOptions.modelOptions?.width || 300;
-                                canvas.height = vitePluginOptions.modelOptions?.height || 300;
+                                canvas.width = modelOptions?.width || 300;
+                                canvas.height = modelOptions?.height || 300;
                                 container.appendChild(canvas);
 
                                 // 加载Live2D模型
                                 createLive2DModel({
                                     modelPath: '/live2d/model.json',
                                     elementId: 'live2d-canvas',
-                                    width: vitePluginOptions.modelOptions?.width || 300,
-                                    height: vitePluginOptions.modelOptions?.height || 300,
-                                    autoFit: vitePluginOptions.modelOptions?.autoFit !== false,
-                                    mouseTracking: vitePluginOptions.modelOptions?.mouseTracking !== false
+                                    width: modelOptions?.width || 300,
+                                    height: modelOptions?.height || 300,
+                                    autoFit: modelOptions?.autoFit !== false,
+                                    mouseTracking: modelOptions?.mouseTracking !== false
                                 }).catch(error => {
                                     console.error('Failed to load Live2D model:', error);
                                 });

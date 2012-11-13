@@ -7,11 +7,13 @@
     "license": "LGPL-3.0-or-later",
     "packageManager": "pnpm@9.15.0",
     "devDependencies": {
+        "hexo": "^7.0.0",
+        "sass": "^1.86.0",
         "typescript": "^5.8.2",
         "vite": "^6.2.3",
         "vitepress": "^1.0.0",
-        "sass": "^1.86.0",
         "vuepress": "^1.9.10",
-        "hexo": "^7.0.0"
+        "@types/node": "^22.13.14",
+        "tsc": "^2.0.4"
     }
 }
