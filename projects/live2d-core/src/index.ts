@@ -1,6 +1,13 @@
 import { Live2DModel, MotionManager } from 'pixi-live2d-display';
 import * as PIXI from 'pixi.js';
 import { Live2dOptions } from './types';
+// @ts-ignore
+import * as Cubism2 from '../lib/cubism2.min.js';
+// @ts-ignore
+import * as Cubism5 from '../lib/cubism5.min.js';
+import { Ticker, TickerPlugin } from '@pixi/ticker';
+import { Application } from '@pixi/app';
+import { InteractionManager } from '@pixi/interaction';
 
 export * from './types';
 export { Live2DModel, MotionManager, PIXI };
@@ -14,15 +21,15 @@ export { Live2DModel, MotionManager, PIXI };
 export async function createLive2dModel(options: Live2dOptions): Promise<Live2DModel> {
     const {
         models,
-        elementId,
-        autoFit = true,
-        autoMotion = true,
-        mouseTracking = true
+        element_id,
+        auto_fit = true,
+        auto_motion = true,
+        mouse_tracking = true
     } = options;
 
     // 初始化PIXI应用
     const app = new PIXI.Application({
-        view: document.getElementById(elementId) as HTMLCanvasElement,
+        view: document.getElementById(element_id) as HTMLCanvasElement,
         width: 300,
         height: 300,
         backgroundAlpha: 0,
@@ -37,7 +44,7 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
     app.stage.addChild(model);
 
     // 自动适应大小
-    if (autoFit) {
+    if (auto_fit) {
         const scale = Math.min(width / model.width, height / model.height);
         model.scale.set(scale);
 
@@ -47,12 +54,12 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
     }
 
     // 启用鼠标跟踪
-    if (mouseTracking) {
+    if (mouse_tracking) {
         enableMouseTracking(model, app.view);
     }
 
     // 自动开始动画
-    if (autoMotion) {
+    if (auto_motion) {
         await startIdleAnimation(model);
     }
 
@@ -95,15 +102,15 @@ async function startIdleAnimation(model: Live2DModel) {
         if (motions) {
             // 优先使用Idle动作组
             if (motions.idle) {
-                model.motion('idle');
+                await model.motion('idle');
             } else if (motions.tap_body) {
                 // 如果没有idle动作，尝试使用tap_body动作
-                model.motion('tap_body');
+                await model.motion('tap_body');
             } else {
                 // 使用第一个可用的动作组
                 const firstMotionGroup = Object.keys(motions)[0];
                 if (firstMotionGroup) {
-                    model.motion(firstMotionGroup);
+                    await model.motion(firstMotionGroup);
                 }
             }
         }
@@ -117,15 +124,22 @@ async function startIdleAnimation(model: Live2DModel) {
  * 在使用Live2D功能前必须调用此函数
  * @param cubismCore 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
  */
-export async function initLive2D(cubismCore?: any) {
-    // 设置Cubism SDK的路径
-    Live2DModel.registerTicker(PIXI.Ticker);
+export async function initializeLive2d(cubismCore?: any) {
+    // 为 Live2DModel 注册 Ticker
+    Live2DModel.registerTicker(Ticker);
+
+    // 为 Application 注册 Ticker
+    Application.registerPlugin(TickerPlugin);
+
+// 注册 InteractionManager 以支持 Live2D 模型的自动交互
+    Renderer.registerPlugin('interaction', InteractionManager);
+
 
     // 注册Cubism SDK
     if (typeof window !== 'undefined' && window.Live2DCubismCore) {
-        Live2DModel.registerCubismCore(window.Live2DCubismCore);
+        Live2DModel.registerCubismCore(Cubism2);
     } else if (cubismCore) {
-        Live2DModel.registerCubismCore(cubismCore);
+        Live2DModel.registerCubismCore(Cubism5);
     } else {
         console.warn('Live2DCubismCore is not loaded. Please include the Cubism SDK.');
     }
@@ -134,7 +148,7 @@ export async function initLive2D(cubismCore?: any) {
 // 导出默认对象
 export default {
     createLive2DModel: createLive2dModel,
-    initLive2D,
+    initLive2D: initializeLive2d,
     Live2DModel,
     MotionManager
 };

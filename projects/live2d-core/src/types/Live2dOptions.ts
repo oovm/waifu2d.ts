@@ -7,21 +7,24 @@ export interface Live2dOptions {
     /**
      * 要渲染到的HTML元素ID
      */
-    elementId: string;
+    element_id: string;
+    /**
+     * 模型配置选项
+     */
     models: ModelOptions[];
     /**
      * 是否自动适应模型大小
      * @default true
      */
-    autoFit?: boolean;
+    auto_fit?: boolean;
     /**
      * 是否自动开始动画
      * @default true
      */
-    autoMotion?: boolean;
+    auto_motion?: boolean;
     /**
      * 是否启用鼠标跟踪
      * @default true
      */
-    mouseTracking?: boolean;
+    mouse_tracking?: boolean;
 }
