@@ -24,6 +24,12 @@ jobs:
           version: 9.15.0
           run_install: false
       
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.15.0
+          run_install: false
+      
       - name: Install dependencies
         run: pnpm install
       

@@ -6,7 +6,6 @@ import * as Cubism2 from '../lib/cubism2.min.js';
 // @ts-ignore
 import * as Cubism5 from '../lib/cubism5.min.js';
 import { Ticker, TickerPlugin } from '@pixi/ticker';
-import { Application } from '@pixi/app';
 import { InteractionManager } from '@pixi/interaction';
 
 export * from './types';
@@ -45,12 +44,12 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
 
     // 自动适应大小
     if (auto_fit) {
-        const scale = Math.min(width / model.width, height / model.height);
+        const scale = Math.min(300 / model.width, 300 / model.height);
         model.scale.set(scale);
 
         // 居中显示
-        model.x = (width - model.width * scale) / 2;
-        model.y = (height - model.height * scale) / 2;
+        model.x = (300 - model.width * scale) / 2;
+        model.y = (300 - model.height * scale) / 2;
     }
 
     // 启用鼠标跟踪
@@ -124,31 +123,27 @@ async function startIdleAnimation(model: Live2DModel) {
  * 在使用Live2D功能前必须调用此函数
  * @param cubismCore 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
  */
-export async function initializeLive2d(cubismCore?: any) {
+export async function initializeLive2D(cubismCore?: any) {
     // 为 Live2DModel 注册 Ticker
     Live2DModel.registerTicker(Ticker);
-
     // 为 Application 注册 Ticker
-    Application.registerPlugin(TickerPlugin);
-
-// 注册 InteractionManager 以支持 Live2D 模型的自动交互
-    Renderer.registerPlugin('interaction', InteractionManager);
-
-
+    PIXI.extensions.add(TickerPlugin)
+    // 注册 InteractionManager 以支持 Live2D 模型的自动交互
+    PIXI.extensions.add(InteractionManager);
     // 注册Cubism SDK
-    if (typeof window !== 'undefined' && window.Live2DCubismCore) {
-        Live2DModel.registerCubismCore(Cubism2);
-    } else if (cubismCore) {
-        Live2DModel.registerCubismCore(Cubism5);
-    } else {
-        console.warn('Live2DCubismCore is not loaded. Please include the Cubism SDK.');
-    }
+    // if (typeof window !== 'undefined' && window.Live2DCubismCore) {
+    //     Live2DModel.registerCubismCore(Cubism2);
+    // } else if (cubismCore) {
+    //     Live2DModel.registerCubismCore(Cubism5);
+    // } else {
+    //     console.warn('Live2DCubismCore is not loaded. Please include the Cubism SDK.');
+    // }
 }
 
 // 导出默认对象
 export default {
-    createLive2DModel: createLive2dModel,
-    initLive2D: initializeLive2d,
+    createLive2dModel,
+    initializeLive2d: initializeLive2D,
     Live2DModel,
     MotionManager
 };
