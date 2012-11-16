@@ -143,7 +143,7 @@ export async function initializeLive2D(cubismCore?: any) {
 // 导出默认对象
 export default {
     createLive2dModel,
-    initializeLive2d: initializeLive2D,
+    initializeLive2D,
     Live2DModel,
     MotionManager
 };
