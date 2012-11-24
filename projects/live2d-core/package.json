@@ -22,7 +22,8 @@
     },
     "files": [
         "dist",
-        "lib"
+        "lib",
+        "src"
     ],
     "scripts": {
         "dev": "vite",

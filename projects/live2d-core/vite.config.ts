@@ -11,6 +11,7 @@ export default defineConfig({
             name: 'Live2D',
         },
         minify: 'esbuild',
+        sourcemap: true,
         rollupOptions: {
             output: [
                 {
@@ -18,14 +19,16 @@ export default defineConfig({
                     entryFileNames: 'l2d.esm.js',
                     format: 'es',
                     // 将ESM输出配置为单个文件而非多个文件
-                    preserveModules: false
+                    preserveModules: false,
+                    sourcemap: true
                 },
                 {
                     name: "l2d",
                     entryFileNames: 'l2d.umd.js',
                     format: 'umd',
                     // 确保 UMD 输出是最小化的
-                    compact: true
+                    compact: true,
+                    sourcemap: true
                 }
             ]
         }
