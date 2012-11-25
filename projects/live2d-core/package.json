@@ -10,14 +10,14 @@
     "author": "Aster <192608617@qq.com>",
     "license": "LGPL-3.0-or-later",
     "type": "module",
-    "main": "dist/index.umd.js",
-    "module": "dist/index.es.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/l2d.umd.js",
+    "module": "dist/l2d.esm.js",
+    "types": "src/index.ts",
     "exports": {
         ".": {
-            "require": "./dist/index.umd.js",
-            "import": "./dist/index.es.js",
-            "types": "./dist/index.d.ts"
+            "require": "./dist/l2d.umd.js",
+            "import": "./dist/l2d.esm.js",
+            "types": "./src/index.ts"
         }
     },
     "files": [
@@ -25,6 +25,10 @@
         "lib",
         "src"
     ],
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org",
+        "access": "public"
+    },
     "scripts": {
         "dev": "vite",
         "build": "vite build",

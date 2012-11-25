@@ -10,7 +10,8 @@
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist"
+        "dist",
+        "src"
     ],
     "scripts": {
         "dev": "tsc --watch",
@@ -21,7 +22,7 @@
         "@doki-land/live2d": "workspace:*"
     },
     "peerDependencies": {
-        "vitepress": "^1.0.0"
+        "vitepress": "^1.6.3"
     }
 }
 

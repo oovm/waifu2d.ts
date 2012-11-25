@@ -8,25 +8,23 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            name: 'Live2D',
+            name: 'Live2DVitepress',
         },
         minify: 'esbuild',
         sourcemap: true,
         rollupOptions: {
             output: [
                 {
-                    name: "l2d",
-                    entryFileNames: 'l2d.esm.js',
+                    name: "l2d-vitepress",
+                    entryFileNames: 'l2d-vitepress.esm.js',
                     format: 'es',
-                    // 将ESM输出配置为单个文件而非多个文件
                     preserveModules: false,
                     compact: true,
                 },
                 {
-                    name: "l2d",
-                    entryFileNames: 'l2d.umd.js',
+                    name: "l2d-vitepress",
+                    entryFileNames: 'l2d-vitepress.umd.js',
                     format: 'umd',
-                    // 确保 UMD 输出是最小化的
                     compact: true,
                 }
             ]

@@ -75,13 +75,13 @@ export default defineConfig({
   // 使用Live2D VitePress插件的主题扩展
   extends: live2dVitePressPlugin({
     // 是否在所有页面上显示Live2D模型，默认为true
-    enableOnAllPages: true,
+    enable_on_all_pages: true,
     
     // 仅在特定页面上显示Live2D模型
-    includePaths: ['/guide/', '/examples/'],
+    include_paths: ['/guide/', '/examples/'],
     
     // 在特定页面上不显示Live2D模型
-    excludePaths: ['/api/'],
+    exclude_paths: ['/api/'],
     
     // 模型文件目录，默认为'public/live2d'
     modelsDir: 'public/live2d',
@@ -111,7 +111,7 @@ export default defineConfig({
           mouseTracking: true
         },
         showOnMobile: false,
-        excludePaths: ['/api/']
+        exclude_paths: ['/api/']
       }).vitePlugin
     ]
   }
