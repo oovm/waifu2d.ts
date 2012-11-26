@@ -12,6 +12,7 @@ time-travel.*
 # Node
 node_modules/
 dist/
+cache/
 
 # Rust
 target/

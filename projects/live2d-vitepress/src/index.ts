@@ -12,7 +12,7 @@ import { minimatch } from 'minimatch';
 
 // 在运行时动态导入，避免编译时的导入问题
 
-export interface Live2dVitePressOptions extends Live2dOptions {
+export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
     /**
      * 选择需要显示 live2d 的页面路由, 默认为所有
      *
@@ -41,14 +41,14 @@ export interface Live2dVitePressOptions extends Live2dOptions {
  * @param options 插件配置选项
  * @returns VitePress主题和Vite插件
  */
-export default function live2dVitePressPlugin(options: Live2dVitePressOptions) {
+export function live2dVitePressPlugin(options: Live2dVitePressOptions) {
     const {
+        element_id = 'live2d-canvas',
         include_paths = [
             '*'
         ],
         exclude_paths = [],
-        models_folder = 'public/live2d',
-        ...modelOptions
+        models_folder = 'public/live2d'
     } = options;
 
     // 创建Vite插件
@@ -56,17 +56,25 @@ export default function live2dVitePressPlugin(options: Live2dVitePressOptions) {
         name: 'vitepress-plugin-live2d'
         // 这里可以添加Vite插件的配置，如果需要的话
     };
+    console.log('live2dVitePressPlugin')
 
     // 创建VitePress主题扩展
     const themePlugin: Theme = {
         enhanceApp(app) {
+            console.log('111');
             // 在客户端加载时初始化Live2D
             if (typeof window !== 'undefined') {
+                console.log('initializeLive2D');
+                initializeLive2D()
                 // 等待路由准备就绪
                 app.router.onAfterRouteChange = (to) => {
                     // 检查当前路径是否应该显示Live2D模型
                     const shouldShow = checkShouldShowLive2D(to, include_paths, exclude_paths);
-                    createLive2d(shouldShow, modelOptions).then(r => r);
+                    const models = options.models || [];
+                    createLive2d(shouldShow, {
+                        element_id,
+                        models, ...options
+                    }).then(r => r);
                 };
             }
         }
@@ -80,7 +88,7 @@ export default function live2dVitePressPlugin(options: Live2dVitePressOptions) {
     };
 }
 
-async function createLive2d(shouldShow: boolean, options: Live2dVitePressOptions) {
+async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
     // 如果已经存在 Live2D 容器，则根据条件显示或隐藏
     const existingContainer = document.getElementById('live2d-container');
     if (existingContainer) {
@@ -113,3 +121,5 @@ function checkShouldShowLive2D(
     // 默认显示所有
     return true;
 }
+
+export default live2dVitePressPlugin;

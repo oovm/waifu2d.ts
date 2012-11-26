@@ -121,25 +121,17 @@ async function startIdleAnimation(model: Live2DModel) {
 /**
  * 加载Cubism SDK
  * 在使用Live2D功能前必须调用此函数
- * @param cubismCore 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
+ * @param cubism2 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
  */
-export async function initializeLive2D(
-    // @ts-ignore
-    cubismCore?: any) {
+export async function initializeLive2D(cubism2?: any) {
     // 为 Live2DModel 注册 Ticker
     Live2DModel.registerTicker(Ticker);
     // 为 Application 注册 Ticker
-    PIXI.extensions.add(TickerPlugin)
+    PIXI.extensions.add(TickerPlugin);
     // 注册 InteractionManager 以支持 Live2D 模型的自动交互
     PIXI.extensions.add(InteractionManager);
-    // 注册Cubism SDK
-    // if (typeof window !== 'undefined' && window.Live2DCubismCore) {
-    //     Live2DModel.registerCubismCore(Cubism2);
-    // } else if (cubismCore) {
-    //     Live2DModel.registerCubismCore(Cubism5);
-    // } else {
-    //     console.warn('Live2DCubismCore is not loaded. Please include the Cubism SDK.');
-    // }
+
+    window.Live2D = cubism2 || Cubism2;
 }
 
 // 导出默认对象

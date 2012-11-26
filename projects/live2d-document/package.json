@@ -11,9 +11,8 @@
     },
     "keywords": ["live2d", "documentation"],
     "author": "",
-    "license": "ISC",
+    "license": "LGPL-3.0-or-later",
     "dependencies": {
-        "@doki-land/live2d": "workspace:*",
         "@doki-land/live2d-vitepress": "workspace:*"
     }
 }

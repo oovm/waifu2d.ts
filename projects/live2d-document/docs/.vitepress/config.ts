@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import live2dVitepressPlugin from '@doki-land/live2d-vitepress/src';
+import { live2dVitePressPlugin } from '@doki-land/live2d-vitepress';
 
 export default defineConfig({
     title: 'Live2D TypeScript Runtime',
@@ -90,5 +90,4 @@ export default defineConfig({
             port: 9999
         }
     },
-    plugins: [live2dVitepressPlugin()]
 });
