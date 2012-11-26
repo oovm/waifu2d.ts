@@ -1,5 +1,14 @@
 import type { Theme } from 'vitepress';
 import { createLive2dModel, initializeLive2D, Live2dOptions } from '@doki-land/live2d';
+import { minimatch } from 'minimatch';
+
+/**
+ * 检查当前路径是否应该显示Live2D模型
+ * @param currentPath 当前路径
+ * @param includePaths 仅在特定页面上显示
+ * @param excludePaths 在特定页面上不显示
+ * @returns 是否应该显示Live2D模型
+ */
 
 // 在运行时动态导入，避免编译时的导入问题
 
@@ -86,30 +95,21 @@ async function createLive2d(shouldShow: boolean, options: Live2dVitePressOptions
     }
 }
 
-/**
- * 检查当前路径是否应该显示Live2D模型
- * @param currentPath 当前路径
- * @param includePaths 仅在特定页面上显示
- * @param excludePaths 在特定页面上不显示
- * @returns 是否应该显示Live2D模型
- */
-import { isMatch } from 'fast-glob';
-
 function checkShouldShowLive2D(
     currentPath: string,
     includePaths: string[],
     excludePaths: string[]
 ): boolean {
     // 如果在排除列表中，则不显示
-    if (excludePaths.some(path => isMatch(currentPath, path))) {
+    if (excludePaths.some(pattern => minimatch(currentPath, pattern))) {
         return false;
     }
 
     // 如果有包含列表，则只在包含列表中的路径显示
     if (includePaths.length > 0) {
-        return includePaths.some(path => isMatch(currentPath, path));
+        return includePaths.some(pattern => minimatch(currentPath, pattern));
     }
 
-    // 否则根据全局设置决定
+    // 默认显示所有
     return true;
 }

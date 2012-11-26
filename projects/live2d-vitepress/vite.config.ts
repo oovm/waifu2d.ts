@@ -3,29 +3,21 @@ import { resolve } from 'path';
 
 export default defineConfig({
     esbuild: {
-        legalComments: 'none',
+        legalComments: 'none'
     },
     build: {
         lib: {
-            entry: resolve(__dirname, 'src/index.ts'),
-            name: 'Live2DVitepress',
+            entry: resolve(__dirname, 'src/index.ts')
         },
         minify: 'esbuild',
         sourcemap: true,
         rollupOptions: {
             output: [
                 {
-                    name: "l2d-vitepress",
-                    entryFileNames: 'l2d-vitepress.esm.js',
+                    entryFileNames: 'index.js',
                     format: 'es',
                     preserveModules: false,
-                    compact: true,
-                },
-                {
-                    name: "l2d-vitepress",
-                    entryFileNames: 'l2d-vitepress.umd.js',
-                    format: 'umd',
-                    compact: true,
+                    compact: true
                 }
             ]
         }

@@ -1,4 +1,4 @@
-import { ModelOptions } from './ModelOptions.ts';
+import { ModelOptions } from './ModelOptions';
 
 /**
  * Live2D模型配置选项

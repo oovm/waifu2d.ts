@@ -13,6 +13,8 @@
         "noEmit": false,
         "outDir": "dist",
         "declaration": true,
+        "sourceMap": true,
+        "declarationMap": true,
 
         /* Linting */
         "strict": true,

@@ -1,14 +1,18 @@
 {
     "name": "@doki-land/live2d-vitepress",
-    "version": "1.0.0",
-    "keywords": ["live2d", "vitepress", "plugin"],
+    "version": "0.0.0",
+    "keywords": [
+        "live2d",
+        "vitepress",
+        "plugin"
+    ],
     "description": "VitePress plugin for Live2D models",
     "author": "Aster <192608617@qq.com>",
     "license": "LGPL-3.0-or-later",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "types": "src/index.ts",
     "files": [
         "dist",
         "src"
@@ -19,10 +23,10 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "@doki-land/live2d": "workspace:*"
+        "@doki-land/live2d": "workspace:*",
+        "minimatch": "^10.0.1"
     },
     "peerDependencies": {
         "vitepress": "^1.6.3"
     }
 }
-
