@@ -122,16 +122,19 @@ async function startIdleAnimation(model: Live2DModel) {
  * 加载Cubism SDK
  * 在使用Live2D功能前必须调用此函数
  * @param cubism2 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
+ * @param cubism5
  */
-export async function initializeLive2D(cubism2?: any) {
+export async function initializeLive2D(cubism2?: any, cubism5?: any) {
     // 为 Live2DModel 注册 Ticker
     Live2DModel.registerTicker(Ticker);
     // 为 Application 注册 Ticker
     PIXI.extensions.add(TickerPlugin);
     // 注册 InteractionManager 以支持 Live2D 模型的自动交互
     PIXI.extensions.add(InteractionManager);
-
+    // @ts-ignore
     window.Live2D = cubism2 || Cubism2;
+    // @ts-ignore
+    window.Live2DCubismCore = cubism5 || Cubism5
 }
 
 // 导出默认对象
