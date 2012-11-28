@@ -34,6 +34,11 @@ export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
      * @default 'public/live2d'
      */
     models_folder?: string;
+    /**
+     * CDN地址，用于从CDN加载@doki-land/live2d库
+     * @example 'https://unpkg.com/@doki-land/live2d@latest/dist/index.js'
+     */
+    cdn?: string;
 }
 
 /**
@@ -51,6 +56,8 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions = {}): Plu
         models_folder = 'public/live2d'
     } = options;
 
+    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@0.0.0/dist/l2d.esm.js';
+
     // 创建并返回Vite插件
     return {
         name: 'vitepress-plugin-live2d',
@@ -61,55 +68,65 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions = {}): Plu
                 });
             };
         },
-        transform(code, id) {
-            if (id.includes('theme') && id.endsWith('.js')) {
-                const injectCode = `
-                    if (typeof window !== 'undefined') {
-                        const { createLive2dModel, initializeLive2D } = await import('@doki-land/live2d');
-                        initializeLive2D();
-                        app.router.onAfterRouteChange = (to) => {
-                            const shouldShow = ${checkShouldShowLive2D.toString()}(to, ${JSON.stringify(include_paths)}, ${JSON.stringify(exclude_paths)});
-                            const models = ${JSON.stringify(options.models || [])};
-                            ${createLive2d.toString()}(shouldShow, {
-                                element_id: '${element_id}',
-                                models,
-                                ...${JSON.stringify(options)}
-                            });
-                        };
-                    }
-                `;
-                return code + injectCode;
+        transformIndexHtml(html) {
+            const injectScript = `<script type="module">
+const { createLive2dModel, initializeLive2D } = await import('${cdn}');
+const routeMap = {};
+document.addEventListener('DOMContentLoaded', () => {
+    const app = window.__VitePress__;
+    app.router.onAfterRouteChange = async (to) => {
+        const shouldShow = routeMap[to] ?? true;
+        const models = ${JSON.stringify(options.models || [])};
+        try {
+            const existingContainer = document.getElementById('live2d-container');
+            if (existingContainer) {
+                existingContainer.style.display = shouldShow ? 'block' : 'none';
+                return;
             }
-            return code;
+            if (shouldShow) {
+                initializeLive2D();
+                await createLive2dModel({
+                    element_id: '${element_id}',
+                    models,
+                    ...${JSON.stringify(options)}
+                });
+            };
+        });
+
+</script>`;
+            return html.replace('</head>', `${injectScript}</head>`);
         }
     };
 }
 
-async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
+export async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
     if (typeof window === 'undefined') return;
-    // 如果已经存在 Live2D 容器，则根据条件显示或隐藏
-    const existingContainer = document.getElementById('live2d-container');
-    if (existingContainer) {
-        existingContainer.style.display = shouldShow ? 'block' : 'none';
-        return;
-    }
+    try {
+        // 如果已经存在 Live2D 容器，则根据条件显示或隐藏
+        const existingContainer = document.getElementById('live2d-container');
+        if (existingContainer) {
+            existingContainer.style.display = shouldShow ? 'block' : 'none';
+            return;
+        }
 
-    // 如果应该显示且尚未创建容器，则创建Live2D模型
-    if (shouldShow) {
-        const {
-            initializeLive2D,
-            createLive2dModel
-        } = await import('@doki-land/live2d');
-        initializeLive2D();
-        await createLive2dModel(options);
+        // 如果应该显示且尚未创建容器，则创建Live2D模型
+        if (shouldShow) {
+            // 此处必须使用惰性渲染!!! 否则会卡死 vite press 的 SSR 渲染流程
+            const {
+                initializeLive2D,
+                createLive2dModel
+            } = await import('@doki-land/live2d');
+            initializeLive2D();
+            // 确保DOM已经准备好
+            await new Promise(resolve => setTimeout(resolve, 100));
+            await createLive2dModel(options);
+        }
+    } catch (error) {
+        console.error('Failed to create Live2D model:', error);
     }
 }
 
-function checkShouldShowLive2D(
-    currentPath: string,
-    includePaths: string[],
-    excludePaths: string[]
-): boolean {
+function allowShowLive2D(currentPath: string, includePaths: string[], excludePaths: string[]): boolean {
     // 如果在排除列表中，则不显示
     if (excludePaths.some(pattern => minimatch(currentPath, pattern))) {
         return false;
