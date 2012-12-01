@@ -1,15 +1,14 @@
-import { Live2DModel, MotionManager } from 'pixi-live2d-display';
-import * as PIXI from 'pixi.js';
-import { Live2dOptions } from './types';
 // @ts-ignore
 import * as Cubism2 from '../lib/cubism2.min.js';
 // @ts-ignore
 import * as Cubism5 from '../lib/cubism5.min.js';
+import * as PIXI from 'pixi.js';
+import { Live2dOptions } from './types';
 import { Ticker, TickerPlugin } from '@pixi/ticker';
 import { InteractionManager } from '@pixi/interaction';
+import { Live2DModel, MotionManager, SoundManager } from 'pixi-live2d-display-lipsyncpatch';
 
-export * from './types';
-export { Live2DModel, MotionManager, PIXI };
+export { MotionManager, SoundManager, Live2DModel, PIXI };
 
 
 /**
@@ -125,22 +124,20 @@ async function startIdleAnimation(model: Live2DModel) {
  * @param cubism5
  */
 export async function initializeLive2D(cubism2?: any, cubism5?: any) {
+    // 首先初始化 Cubism2 SDK
+    console.log('sdk2:', Cubism2);
+    console.log('sdk5:', Cubism5);
+    // @ts-ignore
+    window.Live2D = cubism2 || Cubism2;
+    // 然后初始化 Cubism5 SDK
+    // @ts-ignore
+    window.Live2DCubismCore = cubism5 || Cubism5;
+
+    // 最后初始化 PIXI 相关功能
     // 为 Live2DModel 注册 Ticker
     Live2DModel.registerTicker(Ticker);
     // 为 Application 注册 Ticker
     PIXI.extensions.add(TickerPlugin);
     // 注册 InteractionManager 以支持 Live2D 模型的自动交互
     PIXI.extensions.add(InteractionManager);
-    // @ts-ignore
-    window.Live2D = cubism2 || Cubism2;
-    // @ts-ignore
-    window.Live2DCubismCore = cubism5 || Cubism5
 }
-
-// 导出默认对象
-export default {
-    createLive2dModel,
-    initializeLive2D,
-    Live2DModel,
-    MotionManager
-};

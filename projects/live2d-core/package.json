@@ -35,9 +35,11 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@pixi/interaction": "6.*",
-        "@pixi/ticker": "6.*",
-        "pixi-live2d-display": "^0.4.0",
-        "pixi.js": "6.*"
+        "@pixi/core": "^7.4.3",
+        "@pixi/display": "^7.4.3",
+        "@pixi/interaction": "^6.5.10",
+        "@pixi/ticker": "^7.4.3",
+        "pixi-live2d-display-lipsyncpatch": "0.5.0-ls-7",
+        "pixi.js": "^7.4.3"
     }
 }
