@@ -1,5 +1,5 @@
 import type { Plugin } from 'vitepress';
-import type { Live2dOptions } from '@doki-land/live2d';
+import { initializeLive2D, Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
 /**
@@ -73,7 +73,9 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions = {}): Plu
         },
         transformIndexHtml(html) {
             const injectScript = `<script type="module">
-const { createLive2dModel } = await import('${cdn}');
+const { createLive2dModel, initializeLive2D } = await import('${cdn}');
+initializeLive2D()
+log("已初始化")
 const routeMap = {};
 document.addEventListener('DOMContentLoaded', () => {
     const app = window.__VitePress__;
@@ -99,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 }
+
+
 
 export async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
     if (typeof window === 'undefined') return;

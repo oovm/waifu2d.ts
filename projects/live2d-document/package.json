@@ -14,6 +14,7 @@
     "license": "LGPL-3.0-or-later",
     "dependencies": {
         "vitepress": "^1.6.3",
+        "@doki-land/live2d": "workspace:*",
         "@doki-land/live2d-vitepress": "workspace:*"
     }
 }

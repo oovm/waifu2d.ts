@@ -85,7 +85,9 @@ export default defineConfig({
         }
     },
     vite: {
-        plugins: [live2dVitePressPlugin()],
+        plugins: [live2dVitePressPlugin({
+            cdn: "./l2d.esm.js"
+        })],
         server: {
             host: '0.0.0.0',
             port: 9999
