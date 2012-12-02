@@ -21,14 +21,13 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
-        "typeRoots": ["./lib"],
-        "types": ["cubism2", "cubism5"],
         "paths": {
             "@/*": ["src/*"]
         }
     },
-    "include": ["src"],
+    "include": ["src", "lib"],
     "references": [
         {
             "path": "./tsconfig.node.json"

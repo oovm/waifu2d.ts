@@ -1,5 +1,5 @@
 import type { Plugin } from 'vitepress';
-import { initializeLive2D, Live2dOptions } from '@doki-land/live2d';
+import type { Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
 /**
@@ -22,13 +22,13 @@ export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
      *
      *
      */
-    include_paths?: string[];
+    include_route?: string[];
 
     /**
      * 在特定页面上不显示Live2D模型
      * 如果设置了此选项，则匹配的页面不会显示Live2D模型
      */
-    exclude_paths?: string[];
+    exclude_route?: string[];
     /**
      * 模型文件夹路径
      * @default 'public/live2d'
@@ -46,17 +46,26 @@ export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
  * @param options 插件配置选项
  * @returns VitePress主题和Vite插件
  */
-export function live2dVitePressPlugin(options: Live2dVitePressOptions = {}): Plugin {
+export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
     const {
         element_id = 'live2d-canvas',
-        include_paths = [
+        models,
+        models_folder = 'public/live2d',
+        include_route = [
             '*'
         ],
-        exclude_paths = [],
-        models_folder = 'public/live2d'
+        exclude_route = []
     } = options;
 
-    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@0.0.0/dist/l2d.esm.js';
+    delete options.element_id;
+
+    if (models == undefined || models.length == 0) {
+        throw new Error('At least one live2d model is required');
+    }
+    delete options.models;
+
+    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.esm.js';
+    delete options.cdn;
 
     // 创建并返回Vite插件
     return {
@@ -69,32 +78,17 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions = {}): Plu
             };
         },
         transform() {
+            console.log();
 
         },
         transformIndexHtml(html) {
             const injectScript = `<script type="module">
 const { createLive2dModel, initializeLive2D } = await import('${cdn}');
 initializeLive2D()
-log("已初始化")
-const routeMap = {};
-document.addEventListener('DOMContentLoaded', () => {
-    const app = window.__VitePress__;
-    app.router.onAfterRouteChange = async (to) => {
-        const shouldShow = routeMap[to] ?? true;
-        const models = ${JSON.stringify(options.models || [])};
-        const existingContainer = document.getElementById('live2d-container');
-        if (existingContainer) {
-            existingContainer.style.display = shouldShow ? 'block' : 'none';
-            return;
-        }
-        if (shouldShow) {
-            await createLive2dModel({
-                element_id: '${element_id}',
-                models,
-                ...${JSON.stringify(options)}
-            });
-        };
-    };
+await createLive2dModel({
+    element_id: ${JSON.stringify(element_id)},
+    models: ${JSON.stringify(models)},
+    ...${JSON.stringify(options)},
 });
 </script>`;
             return html.replace('</head>', `${injectScript}</head>`);
@@ -103,12 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-
 export async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
     if (typeof window === 'undefined') return;
     try {
         // 如果已经存在 Live2D 容器，则根据条件显示或隐藏
-        const existingContainer = document.getElementById('live2d-container');
+        const existingContainer = document.getElementById(options.element_id);
         if (existingContainer) {
             existingContainer.style.display = shouldShow ? 'block' : 'none';
             return;

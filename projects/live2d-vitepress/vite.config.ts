@@ -3,7 +3,8 @@ import { resolve } from 'path';
 
 export default defineConfig({
     esbuild: {
-        legalComments: 'none'
+        sourcemap: true,
+        legalComments: 'none',
     },
     build: {
         lib: {

@@ -5,13 +5,13 @@ import { ModelOptions } from './ModelOptions';
  */
 export interface Live2dOptions {
     /**
-     * 要渲染到的HTML元素ID
-     */
-    element_id: string;
-    /**
      * 模型配置选项
      */
     models: ModelOptions[];
+    /**
+     * 要渲染到的HTML元素ID
+     */
+    element_id?: string;
     /**
      * 是否自动适应模型大小
      * @default true

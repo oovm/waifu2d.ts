@@ -1,14 +1,12 @@
-// @ts-ignore
-import * as Cubism2 from '../lib/cubism2.min.js';
-
-import * as Cubism5 from '../lib/cubism5.min.js';
+import '../lib/cubism2.min.js';
+import '../lib/cubism5.min.js';
 import * as PIXI from 'pixi.js';
 import { Live2dOptions } from './types';
 import { Ticker, TickerPlugin } from '@pixi/ticker';
 import { InteractionManager } from '@pixi/interaction';
 import { Live2DModel, MotionManager, SoundManager } from 'pixi-live2d-display-lipsyncpatch';
 
-export { MotionManager, SoundManager, Live2DModel, PIXI };
+export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
 
 
 /**
@@ -125,13 +123,13 @@ async function startIdleAnimation(model: Live2DModel) {
  */
 export async function initializeLive2D(cubism2?: any, cubism5?: any) {
     // 首先初始化 Cubism2 SDK
-    console.log('sdk2:', Cubism2);
-    console.log('sdk5:', Cubism5);
+    // console.log('sdk2:', Cubism2);
+    // console.log('sdk5:', Cubism5);
     // @ts-ignore
-    window.Live2D = cubism2 || Cubism2;
+    // window.Live2D = cubism2 || Cubism2;
     // 然后初始化 Cubism5 SDK
     // @ts-ignore
-    window.Live2DCubismCore = cubism5 || Cubism5;
+    // window.Live2DCubismCore = cubism5 || Cubism5().Live2DCubismCore;
 
     // 最后初始化 PIXI 相关功能
     // 为 Live2DModel 注册 Ticker

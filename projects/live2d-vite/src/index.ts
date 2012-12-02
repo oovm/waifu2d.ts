@@ -1,8 +1,9 @@
 import type { Plugin, ResolvedConfig } from 'vite';
 import * as path from 'path';
 import * as fs from 'fs';
+import { Live2dOptions } from '@doki-land/live2d';
 
-export interface Live2DVitePluginOptions extends Live2DModelOptions {
+export interface Live2DVitePluginOptions extends Live2dOptions {
     /**
      * Live2D模型文件的目录路径
      * @default 'public/live2d'
