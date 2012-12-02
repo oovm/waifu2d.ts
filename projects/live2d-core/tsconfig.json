@@ -22,6 +22,8 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
+        "typeRoots": ["./lib"],
+        "types": ["cubism2", "cubism5"],
         "paths": {
             "@/*": ["src/*"]
         }

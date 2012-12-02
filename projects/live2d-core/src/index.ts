@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as Cubism2 from '../lib/cubism2.min.js';
-// @ts-ignore
+
 import * as Cubism5 from '../lib/cubism5.min.js';
 import * as PIXI from 'pixi.js';
 import { Live2dOptions } from './types';
