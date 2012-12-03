@@ -91,36 +91,14 @@ await createLive2dModel({
     ...${JSON.stringify(options)},
 });
 </script>`;
-            return html.replace('</head>', `${injectScript}</head>`);
+            html = html.replace('</body>', `<div id="${element_id}" style="display: none;"></div></body>`);
+            html = html.replace('</head>', `${injectScript}</head>`);
+            return html;
         }
     };
 }
 
-
-export async function createLive2d(shouldShow: boolean, options: Live2dOptions) {
-    if (typeof window === 'undefined') return;
-    try {
-        // 如果已经存在 Live2D 容器，则根据条件显示或隐藏
-        const existingContainer = document.getElementById(options.element_id);
-        if (existingContainer) {
-            existingContainer.style.display = shouldShow ? 'block' : 'none';
-            return;
-        }
-
-        // 如果应该显示且尚未创建容器，则创建Live2D模型
-        if (shouldShow) {
-            // 此处必须使用惰性渲染!!! 否则会卡死 vite press 的 SSR 渲染流程
-            const { createLive2dModel } = await import('@doki-land/live2d');
-            // 确保DOM已经准备好
-            await new Promise(resolve => setTimeout(resolve, 100));
-            await createLive2dModel(options);
-        }
-    } catch (error) {
-        console.error('Failed to create Live2D model:', error);
-    }
-}
-
-function allowShowLive2D(currentPath: string, includePaths: string[], excludePaths: string[]): boolean {
+export function allowShowLive2D(currentPath: string, includePaths: string[], excludePaths: string[]): boolean {
     // 如果在排除列表中，则不显示
     if (excludePaths.some(pattern => minimatch(currentPath, pattern))) {
         return false;

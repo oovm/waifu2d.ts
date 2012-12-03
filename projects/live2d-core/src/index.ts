@@ -8,7 +8,6 @@ import { Live2DModel, MotionManager, SoundManager } from 'pixi-live2d-display-li
 
 export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
 
-
 /**
  * 创建Live2D模型
  * @param options 模型配置选项
@@ -16,18 +15,22 @@ export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
  */
 export async function createLive2dModel(options: Live2dOptions): Promise<Live2DModel> {
     const {
+        element_id = 'live2d-canvas',
         models,
-        element_id,
+        width = 300,
+        height = 300,
         auto_fit = true,
         auto_motion = true,
         mouse_tracking = true
     } = options;
-
+    // 创建画布
+    let element = findOrCreateCanvas(element_id)
     // 初始化PIXI应用
     const app = new PIXI.Application({
-        view: document.getElementById(element_id) as HTMLCanvasElement,
-        width: 300,
-        height: 300,
+        view: element,
+        width: width,
+        height: height,
+        // resolution: 1,
         backgroundAlpha: 0,
         autoDensity: true,
         antialias: true
@@ -41,12 +44,12 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
 
     // 自动适应大小
     if (auto_fit) {
-        const scale = Math.min(300 / model.width, 300 / model.height);
+        const scale = Math.min(width / model.width, height / model.height);
         model.scale.set(scale);
 
         // 居中显示
-        model.x = (300 - model.width * scale) / 2;
-        model.y = (300 - model.height * scale) / 2;
+        model.x = (width - model.width * scale) / 2;
+        model.y = (height - model.height * scale) / 2;
     }
 
     // 启用鼠标跟踪
@@ -61,6 +64,19 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
 
     return model;
 }
+
+function findOrCreateCanvas(id: string): HTMLCanvasElement {
+    let canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = id;
+        document.body.appendChild(canvas);
+        canvas.style.display = 'none';
+        canvas.style.position = 'fixed';
+    }
+    return canvas;
+}
+
 
 /**
  * 启用鼠标跟踪功能

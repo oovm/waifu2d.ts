@@ -9,9 +9,20 @@ export interface Live2dOptions {
      */
     models: ModelOptions[];
     /**
-     * 要渲染到的HTML元素ID
+     * 画布的ID
+     * @default 'live2d-canvas'
      */
-    element_id?: string;
+    element_id?: string,
+    /**
+     * 画布的宽度
+     * @default 300
+     */
+    width?: number;
+    /**
+     * 画布的高度
+     * @default 300
+     */
+    height?: number;
     /**
      * 是否自动适应模型大小
      * @default true
