@@ -87,6 +87,7 @@ export default defineConfig({
     vite: {
         plugins: [
             live2dVitePressPlugin({
+                cdn: '/l2d.esm.js',
                 models: [
                     {
                         model_url: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json'
@@ -96,7 +97,15 @@ export default defineConfig({
         ],
         server: {
             host: '0.0.0.0',
-            port: 9999
+            port: 9999,
+            fs: {
+                allow: ['../']
+            }
+        },
+        resolve: {
+            alias: {
+                '/l2d.esm.js': '../../live2d-core/dist/l2d.esm.js'
+            }
         }
     }
 });

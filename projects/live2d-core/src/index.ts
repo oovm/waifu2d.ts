@@ -36,6 +36,13 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
         antialias: true
     });
 
+    // 设置画布样式
+    element.style.display = 'block';
+    element.style.position = 'fixed';
+    element.style.bottom = `${options.spacing_y || 20}px`;
+    element.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 20}px`;
+    element.style.zIndex = '999';
+
     // 加载模型
     const model = await Live2DModel.from(models[0]);
 

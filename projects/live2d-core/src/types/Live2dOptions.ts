@@ -24,6 +24,21 @@ export interface Live2dOptions {
      */
     height?: number;
     /**
+     * 模型位置，可选 'left' 或 'right'
+     * @default 'right'
+     */
+    position?: 'left' | 'right';
+    /**
+     * 模型与左右边框的距离（像素）
+     * @default 20
+     */
+    spacing_x?: number;
+    /**
+     * 模型与底部边框的距离（像素）
+     * @default 20
+     */
+    spacing_y?: number;
+    /**
      * 是否自动适应模型大小
      * @default true
      */
