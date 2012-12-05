@@ -58,48 +58,6 @@ export default function live2dVitePlugin(options: Live2DVitePluginOptions = {}):
             // 创建Live2D脚本
             const live2dScript = `
 <script type="module">
-  // 检查是否为移动设备
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (${!showOnMobile} && isMobile) {
-    // 在移动设备上不显示
-    console.log('Live2D is disabled on mobile devices');
-  } else {
-    // 动态导入Live2D核心库
-    import('@doki-land/live2d').then(({ createLive2DModel, initLive2D }) => {
-      // 初始化Live2D
-      initLive2D().then(() => {
-        // 创建Live2D容器
-        const container = document.createElement('div');
-        container.id = 'live2d-container';
-        container.style.position = 'fixed';
-        container.style.right = '0';
-        container.style.bottom = '0';
-        container.style.zIndex = '999';
-        document.body.appendChild(container);
-        
-        // 创建Canvas元素
-        const canvas = document.createElement('canvas');
-        canvas.id = 'live2d-canvas';
-        canvas.width = ${modelOptions.width || 300};
-        canvas.height = ${modelOptions.height || 300};
-        container.appendChild(canvas);
-        
-        // 加载Live2D模型
-        createLive2DModel({
-          modelPath: '/live2d/model.json',
-          elementId: 'live2d-canvas',
-          width: ${modelOptions.width || 300},
-          height: ${modelOptions.height || 300},
-          autoFit: ${modelOptions.autoFit !== false},
-          mouseTracking: ${modelOptions.mouseTracking !== false}
-        }).catch(error => {
-          console.error('Failed to load Live2D model:', error);
-        });
-      });
-    }).catch(error => {
-      console.error('Failed to import Live2D library:', error);
-    });
-  }
 </script>
 `;
 

@@ -3,8 +3,17 @@ import '../lib/cubism5.min.js';
 import * as PIXI from 'pixi.js';
 import { Live2dOptions } from './types';
 import { Ticker, TickerPlugin } from '@pixi/ticker';
-import { InteractionManager } from '@pixi/interaction';
-import { Live2DModel, MotionManager, SoundManager } from 'pixi-live2d-display-lipsyncpatch';
+import {
+    Live2DFactory,
+    Live2DModel,
+    ModelSettings,
+    MotionManager,
+    SoundManager
+} from 'pixi-live2d-display-lipsyncpatch';
+import { Application, loadJson } from 'pixi.js';
+import jsonRenderer from 'hexo/dist/plugins/renderer/json';
+import { types } from 'sass';
+import Error = types.Error;
 
 export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
 
@@ -13,7 +22,7 @@ export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
  * @param options 模型配置选项
  * @returns Promise<Live2DModel> 加载完成的Live2D模型实例
  */
-export async function createLive2dModel(options: Live2dOptions): Promise<Live2DModel> {
+export async function createLive2D(options: Live2dOptions): Promise<Live2DModel> {
     const {
         element_id = 'live2d-canvas',
         models,
@@ -26,7 +35,7 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
     // 创建画布
     let element = findOrCreateCanvas(element_id, options)
     // 初始化PIXI应用
-    const app = new PIXI.Application({
+    const app = new Application({
         view: element,
         width: width,
         height: height,
@@ -43,8 +52,12 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
         }
     });
 
+    console.log("rt:",  Live2DFactory.runtimes)
+
     // 加载模型
-    const model = await Live2DModel.from(models[0]);
+    const model = await Live2DModel.from(models[0].model_url);
+
+
 
     // 添加模型到舞台
     app.stage.addChild(model);
@@ -166,5 +179,5 @@ export async function initializeLive2D(cubism2?: any, cubism5?: any) {
     // 为 Application 注册 Ticker
     PIXI.extensions.add(TickerPlugin);
     // 注册 InteractionManager 以支持 Live2D 模型的自动交互
-    PIXI.extensions.add(InteractionManager);
+    // PIXI.extensions.add(InteractionManager);
 }

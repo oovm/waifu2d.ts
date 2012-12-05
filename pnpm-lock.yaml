@@ -45,9 +45,6 @@ importers:
       '@pixi/display':
         specifier: ^7.4.3
         version: 7.4.3(@pixi/core@7.4.3)
-      '@pixi/interaction':
-        specifier: ^6.5.10
-        version: 6.5.10(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/math@7.4.3)(@pixi/ticker@7.4.3)(@pixi/utils@7.4.3)
       '@pixi/ticker':
         specifier: ^7.4.3
         version: 7.4.3
@@ -1568,15 +1565,6 @@ packages:
       '@pixi/core': 7.4.3
       '@pixi/display': 7.4.3
       '@pixi/sprite': 7.4.3
-
-  '@pixi/interaction@6.5.10':
-    resolution: {integrity: sha512-v809pJmXA2B9dV/vdrDMUqJT+fBB/ARZli2YRmI2dPbEbkaYr8FNmxCAJnwT8o+ymTx044Ie820hn9tVrtMtfA==}
-    peerDependencies:
-      '@pixi/core': 6.5.10
-      '@pixi/display': 6.5.10
-      '@pixi/math': 6.5.10
-      '@pixi/ticker': 6.5.10
-      '@pixi/utils': 6.5.10
 
   '@pixi/math@7.4.3':
     resolution: {integrity: sha512-/uJOVhR2DOZ+zgdI6Bs/CwcXT4bNRKsS+TqX3ekRIxPCwaLra+Qdm7aDxT5cTToDzdxbKL5+rwiLu3Y1egILDw==}
@@ -8482,14 +8470,6 @@ snapshots:
       '@pixi/core': 7.4.3
       '@pixi/display': 7.4.3(@pixi/core@7.4.3)
       '@pixi/sprite': 7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))
-
-  '@pixi/interaction@6.5.10(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/math@7.4.3)(@pixi/ticker@7.4.3)(@pixi/utils@7.4.3)':
-    dependencies:
-      '@pixi/core': 7.4.3
-      '@pixi/display': 7.4.3(@pixi/core@7.4.3)
-      '@pixi/math': 7.4.3
-      '@pixi/ticker': 7.4.3
-      '@pixi/utils': 7.4.3
 
   '@pixi/math@7.4.3': {}
 

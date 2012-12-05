@@ -90,7 +90,7 @@ export default defineConfig({
                 cdn: '/l2d.esm.js',
                 models: [
                     {
-                        model_url: 'https://cdn.jsdelivr.net/gh/Eikanya/Live2d-model/Live2D/Senko_Normals/senko.model3.json'
+                        model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
                     }
                 ]
             })

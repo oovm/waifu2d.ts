@@ -1,5 +1,5 @@
 import type { Plugin } from 'vitepress';
-import type { Live2dOptions } from '@doki-land/live2d';
+import type  {  Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
 /**
@@ -83,9 +83,9 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
         },
         transformIndexHtml(html) {
             const injectScript = `<script type="module">
-const { createLive2dModel, initializeLive2D } = await import('${cdn}');
+const { createLive2D, initializeLive2D } = await import('${cdn}');
 initializeLive2D()
-await createLive2dModel({
+await createLive2D({
     element_id: ${JSON.stringify(element_id)},
     models: ${JSON.stringify(models)},
     ...${JSON.stringify(options)},
