@@ -91,7 +91,7 @@ await createLive2dModel({
     ...${JSON.stringify(options)},
 });
 </script>`;
-            html = html.replace('</body>', `<canvas id="${element_id}"/></body>`);
+            // html = html.replace('</body>', `<canvas id="${element_id}"/></body>`);
             html = html.replace('</head>', `${injectScript}</head>`);
             return html;
         }

@@ -24,7 +24,7 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
         mouse_tracking = true
     } = options;
     // 创建画布
-    let element = findOrCreateCanvas(element_id)
+    let element = findOrCreateCanvas(element_id, options)
     // 初始化PIXI应用
     const app = new PIXI.Application({
         view: element,
@@ -33,15 +33,15 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
         // resolution: 1,
         backgroundAlpha: 0,
         autoDensity: true,
-        antialias: true
+        antialias: true,
+        eventMode: 'static',
+        eventFeatures: {
+            move: true,
+            globalMove: true,
+            click: true,
+            wheel: true
+        }
     });
-
-    // 设置画布样式
-    element.style.display = 'block';
-    element.style.position = 'fixed';
-    element.style.bottom = `${options.spacing_y || 20}px`;
-    element.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 20}px`;
-    element.style.zIndex = '999';
 
     // 加载模型
     const model = await Live2DModel.from(models[0]);
@@ -72,14 +72,20 @@ export async function createLive2dModel(options: Live2dOptions): Promise<Live2DM
     return model;
 }
 
-function findOrCreateCanvas(id: string): HTMLCanvasElement {
+function findOrCreateCanvas(id: string, options: Live2dOptions): HTMLCanvasElement {
     let canvas = document.getElementById(id) as HTMLCanvasElement;
     if (!canvas) {
         canvas = document.createElement('canvas');
         canvas.id = id;
         document.body.appendChild(canvas);
         canvas.style.display = 'none';
-        canvas.style.position = 'fixed';
+        canvas.style.position = 'absolute';
+        // 设置画布样式
+        canvas.style.display = 'block';
+        canvas.style.position = 'absolute';
+        canvas.style.bottom = `${options.spacing_y || 20}px`;
+        canvas.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 20}px`;
+        canvas.style.zIndex = '9999';
     }
     return canvas;
 }
