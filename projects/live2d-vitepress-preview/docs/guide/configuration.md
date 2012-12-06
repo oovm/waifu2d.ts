@@ -67,7 +67,7 @@ export default defineConfig({
 ```js
 // .vitepress/config.js
 import { defineConfig } from 'vitepress';
-import live2dVitePressPlugin from '@doki-land/live2d-vitepress';
+import live2dVitePressPlugin from 'projects/live2d-vitepress';
 
 export default defineConfig({
   // ... 其他VitePress配置

@@ -6,14 +6,14 @@ import { Ticker, TickerPlugin } from '@pixi/ticker';
 import {
     Live2DFactory,
     Live2DModel,
-    ModelSettings,
+
     MotionManager,
     SoundManager
 } from 'pixi-live2d-display-lipsyncpatch';
-import { Application, loadJson } from 'pixi.js';
-import jsonRenderer from 'hexo/dist/plugins/renderer/json';
-import { types } from 'sass';
-import Error = types.Error;
+import { Application,  } from 'pixi.js';
+import { icons } from './icons/icons';
+import './icons/style.css';
+
 
 export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
 
@@ -52,22 +52,19 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
         }
     });
 
-    console.log("rt:",  Live2DFactory.runtimes)
-
     // 加载模型
     const model = await Live2DModel.from(models[0].model_url);
-
-
 
     // 添加模型到舞台
     app.stage.addChild(model);
 
     // 自动适应大小
     if (auto_fit) {
+        // 修复auto_fit功能，确保模型不被截断且保持正确比例
         const scale = Math.min(width / model.width, height / model.height);
         model.scale.set(scale);
 
-        // 居中显示
+        // 居中显示，确保模型完全可见
         model.x = (width - model.width * scale) / 2;
         model.y = (height - model.height * scale) / 2;
     }
@@ -92,12 +89,12 @@ function findOrCreateCanvas(id: string, options: Live2dOptions): HTMLCanvasEleme
         canvas.id = id;
         document.body.appendChild(canvas);
         canvas.style.display = 'none';
-        canvas.style.position = 'absolute';
+        canvas.style.position = 'fixed';
         // 设置画布样式
         canvas.style.display = 'block';
         canvas.style.position = 'absolute';
-        canvas.style.bottom = `${options.spacing_y || 20}px`;
-        canvas.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 20}px`;
+        canvas.style.bottom = `${options.spacing_y || 0}px`;
+        canvas.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 0}px`;
         canvas.style.zIndex = '9999';
     }
     return canvas;
@@ -109,7 +106,7 @@ function findOrCreateCanvas(id: string, options: Live2dOptions): HTMLCanvasEleme
  * @param model Live2D模型实例
  * @param canvas 画布元素
  */
-function enableMouseTracking(model: Live2DModel, canvas: HTMLCanvasElement) {
+function enableMouseTracking(model: Live2DModel, canvas: any) {
     // 跟踪鼠标移动
     document.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -118,11 +115,35 @@ function enableMouseTracking(model: Live2DModel, canvas: HTMLCanvasElement) {
 
         // 计算鼠标位置相对于画布中心的偏移
         const mouseX = (event.clientX - centerX) / rect.width;
-        const mouseY = (event.clientY - centerY) / rect.height;
+        // 修正Y轴方向，使用负值来反转方向
+        const mouseY = -(event.clientY - centerY) / rect.height;
 
         // 更新模型的视线方向
         if (model.internalModel) {
             model.internalModel.focusController?.focus(mouseX, mouseY);
+        }
+    });
+    
+    // 添加点击模型触发动作的交互
+    canvas.addEventListener('click', () => {
+        // 尝试播放tap_body动作，如果没有则尝试其他可用动作
+        try {
+            const motions = model.internalModel?.motionManager.definitions;
+            if (motions) {
+                if (motions.tap_body) {
+                    model.motion('tap_body');
+                } else if (motions.tap) {
+                    model.motion('tap');
+                } else {
+                    // 使用第一个可用的动作组
+                    const firstMotionGroup = Object.keys(motions)[0];
+                    if (firstMotionGroup) {
+                        model.motion(firstMotionGroup);
+                    }
+                }
+            }
+        } catch (error) {
+            console.warn('Failed to play tap animation:', error);
         }
     });
 }
@@ -142,7 +163,7 @@ async function startIdleAnimation(model: Live2DModel) {
             if (motions.idle) {
                 await model.motion('idle');
             } else if (motions.tap_body) {
-                // 如果没有idle动作，尝试使用tap_body动作
+                // 如果没有idle动作，尝试使用 tap_body 动作
                 await model.motion('tap_body');
             } else {
                 // 使用第一个可用的动作组

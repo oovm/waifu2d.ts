@@ -24,7 +24,7 @@ pnpm add @doki-land/live2d-vitepress
 ```js
 // .vitepress/config.js / .vitepress/config.ts
 import { defineConfig } from 'vitepress';
-import live2dVitePressPlugin from '@doki-land/live2d-vitepress';
+import live2dVitePressPlugin from 'projects/live2d-vitepress';
 
 export default defineConfig({
   // ... 其他VitePress配置
