@@ -1,0 +1,38 @@
+.live2d-icon-panel {
+    position: fixed;
+    right: 10px;
+    bottom: 150px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.live2d-icon-panel.visible {
+    opacity: 1;
+}
+
+.live2d-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.live2d-icon:hover {
+    transform: scale(1.1);
+}
+
+.live2d-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #666;
+}

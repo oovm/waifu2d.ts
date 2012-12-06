@@ -78,6 +78,9 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
     if (auto_motion) {
         await startIdleAnimation(model);
     }
+    
+    // 创建右侧图标栏
+    createIconPanel(model, element);
 
     return model;
 }
