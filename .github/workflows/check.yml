@@ -1,4 +1,4 @@
-name: Test
+name: Check Tests
 
 on:
   push:
@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -23,7 +22,6 @@ jobs:
         with:
           version: 9.15.0
           run_install: false
-      
       - name: Install dependencies
         run: pnpm install
       

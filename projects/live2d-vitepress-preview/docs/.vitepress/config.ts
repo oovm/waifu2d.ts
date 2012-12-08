@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import { live2dVitePressPlugin } from '../../../live2d-vitepress';
+import { live2dVitePressPlugin } from '@doki-land/live2d-vitepress';
 
 export default defineConfig({
     title: 'Live2D TypeScript Runtime',
