@@ -5,7 +5,7 @@ export default defineConfig({
     title: 'Live2D TypeScript Runtime',
     description: '基于pixi-live2d-display的TypeScript运行库',
     lang: 'zh-CN',
-
+    ignoreDeadLinks: true,
     themeConfig: {
         logo: '/logo.svg',
         nav: [

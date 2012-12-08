@@ -1,4 +1,4 @@
-import type { Plugin } from 'vitepress';
+import type { Plugin } from 'vuepress';
 import type  {  Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
@@ -12,15 +12,13 @@ import { minimatch } from 'minimatch';
 
 // 在运行时动态导入，避免编译时的导入问题
 
-export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
+export interface Live2dVuePressOptions extends Partial<Live2dOptions> {
     /**
      * 选择需要显示 live2d 的页面路由, 默认为所有
      *
      * 如果设置了此选项，则只有匹配的页面会显示Live2D模型
      *
      * @default ['*']
-     *
-     *
      */
     include_route?: string[];
 
@@ -42,11 +40,11 @@ export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
 }
 
 /**
- * VitePress插件，用于在VitePress文档中使用Live2D模型
+ * VuePress插件，用于在VuePress文档中使用Live2D模型
  * @param options 插件配置选项
- * @returns VitePress主题和Vite插件
+ * @returns VuePress插件
  */
-export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
+export function live2dVuePressPlugin(options: Live2dVuePressOptions): Plugin {
     const {
         element_id = 'live2d-canvas',
         models,
@@ -67,34 +65,50 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
     const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.esm.js';
     delete options.cdn;
 
-    // 创建并返回Vite插件
+    // 创建并返回VuePress插件
     return {
-        name: 'vitepress-plugin-live2d',
-        configureServer(server) {
-            return () => {
-                server.middlewares.use((_req, _res, next) => {
-                    next();
-                });
-            };
-        },
-        transform() {
-            console.log();
-
-        },
-        transformIndexHtml(html) {
-            const injectScript = `<script type="module">
-const { createLive2D, initializeLive2D } = await import('${cdn}');
-initializeLive2D()
-await createLive2D({
-    element_id: ${JSON.stringify(element_id)},
-    models: ${JSON.stringify(models)},
-    ...${JSON.stringify(options)},
-});
-</script>`;
-            // html = html.replace('</body>', `<canvas id="${element_id}"/></body>`);
-            html = html.replace('</head>', `${injectScript}</head>`);
-            return html;
-        }
+        name: 'vuepress-plugin-live2d',
+        enhanceAppFiles: [
+            {
+                name: 'live2d-plugin',
+                content: `
+                export default ({ router }) => {
+                    router.afterEach((to) => {
+                        if (typeof window !== 'undefined') {
+                            const currentPath = to.path;
+                            const shouldShow = allowShowLive2D(currentPath, ${JSON.stringify(include_route)}, ${JSON.stringify(exclude_route)});
+                            
+                            if (shouldShow) {
+                                // 动态加载Live2D库
+                                import('${cdn}').then(({ createLive2D, initializeLive2D }) => {
+                                    initializeLive2D();
+                                    // 检查是否已经存在canvas元素
+                                    let canvas = document.getElementById('${element_id}');
+                                    if (!canvas) {
+                                        canvas = document.createElement('canvas');
+                                        canvas.id = '${element_id}';
+                                        document.body.appendChild(canvas);
+                                    }
+                                    
+                                    createLive2D({
+                                        element_id: ${JSON.stringify(element_id)},
+                                        models: ${JSON.stringify(models)},
+                                        ...${JSON.stringify(options)},
+                                    });
+                                });
+                            } else {
+                                // 如果不应该显示，移除canvas元素
+                                const canvas = document.getElementById('${element_id}');
+                                if (canvas) {
+                                    canvas.remove();
+                                }
+                            }
+                        }
+                    });
+                }
+                `
+            }
+        ]
     };
 }
 
@@ -113,4 +127,4 @@ export function allowShowLive2D(currentPath: string, includePaths: string[], exc
     return true;
 }
 
-export default live2dVitePressPlugin;
+export default live2dVuePressPlugin;
