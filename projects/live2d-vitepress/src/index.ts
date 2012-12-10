@@ -2,8 +2,6 @@ import type { Plugin } from 'vitepress';
 import type  {  Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
-export type { ModelOptions } from '@doki-land/live2d';
-
 /**
  * 检查当前路径是否应该显示Live2D模型
  * @param currentPath 当前路径
@@ -100,19 +98,6 @@ await createLive2D({
     };
 }
 
-export function allowShowLive2D(currentPath: string, includePaths: string[], excludePaths: string[]): boolean {
-    // 如果在排除列表中，则不显示
-    if (excludePaths.some(pattern => minimatch(currentPath, pattern))) {
-        return false;
-    }
 
-    // 如果有包含列表，则只在包含列表中的路径显示
-    if (includePaths.length > 0) {
-        return includePaths.some(pattern => minimatch(currentPath, pattern));
-    }
-
-    // 默认显示所有
-    return true;
-}
 
 export default live2dVitePressPlugin;

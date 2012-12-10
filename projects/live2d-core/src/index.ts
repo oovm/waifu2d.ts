@@ -4,8 +4,8 @@ import * as PIXI from 'pixi.js';
 import { Live2dOptions } from './types';
 import { Ticker, TickerPlugin } from '@pixi/ticker';
 import {
+    Live2DFactory,
     Live2DModel,
-
     MotionManager,
     SoundManager
 } from 'pixi-live2d-display-lipsyncpatch';
@@ -13,7 +13,7 @@ import { Application,  } from 'pixi.js';
 import { icons } from './icons/icons';
 import './icons/style.css';
 
-export * from "./types"
+
 export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
 
 /**
