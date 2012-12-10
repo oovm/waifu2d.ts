@@ -2,6 +2,8 @@ import type { Plugin } from 'vitepress';
 import type  {  Live2dOptions } from '@doki-land/live2d';
 import { minimatch } from 'minimatch';
 
+export type { ModelOptions } from '@doki-land/live2d';
+
 /**
  * 检查当前路径是否应该显示Live2D模型
  * @param currentPath 当前路径

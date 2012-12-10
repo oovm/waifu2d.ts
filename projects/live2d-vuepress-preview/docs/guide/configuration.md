@@ -67,12 +67,94 @@ export default defineConfig({
 ```js
 // .vitepress/config.js
 import { defineConfig } from 'vitepress';
-import live2dVitePressPlugin from 'projects/live2d-vitepress';
+import live2dVitePressPlugin from '@doki-land/live2d-vitepress';
 
 export default defineConfig({
   // ... 其他VitePress配置
   
   // 使用Live2D VitePress插件的主题扩展
+  vite: {
+    plugins: [
+      live2dVitePressPlugin({
+        // 模型配置
+        models: [
+          {
+            model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
+          }
+        ],
+        // 画布配置
+        width: 280,
+        height: 320,
+        // 位置配置
+        position: 'right',
+        spacing_x: 20,
+        spacing_y: 20,
+        // 行为配置
+        auto_fit: true,
+        auto_motion: true,
+        mouse_tracking: true,
+        // 路由配置
+        include_route: ['*'],
+        exclude_route: ['/examples/vitepress']
+      })
+    ]
+  }
+});
+```
+
+## VuePress插件配置
+
+使用`@doki-land/live2d-vuepress`插件时，您可以通过以下选项进行配置：
+
+```js
+// .vuepress/config.js
+import { defineConfig } from 'vuepress';
+import { live2dVuePressPlugin } from '@doki-land/live2d-vuepress';
+
+export default defineConfig({
+  // ... 其他VuePress配置
+  
+  // 使用Live2D VuePress插件
+  plugins: [
+    live2dVuePressPlugin({
+      // 模型配置
+      models: [
+        {
+          model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json',
+          position: {
+            scale: 1.0,      // 模型缩放比例
+            anchor_x: 0.5,   // 模型X轴锚点
+            anchor_y: 0.5,   // 模型Y轴锚点
+            width: 300,      // 模型宽度
+            height: 300      // 模型高度
+          },
+          mobile: {          // 移动端配置
+            model_url: '移动端模型URL',
+            position: {
+              scale: 0.8
+            }
+          }
+        }
+      ],
+      // 画布配置
+      element_id: 'live2d-canvas', // 画布ID
+      width: 280,                  // 画布宽度
+      height: 320,                 // 画布高度
+      // 位置配置
+      position: 'right',           // 模型位置，可选 'left' 或 'right'
+      spacing_x: 20,               // 模型与左右边框的距离（像素）
+      spacing_y: 20,               // 模型与底部边框的距离（像素）
+      // 行为配置
+      auto_fit: true,              // 是否自动适应模型大小
+      auto_motion: true,           // 是否自动开始动画
+      mouse_tracking: true,        // 是否启用鼠标跟踪
+      // 路由配置
+      include_route: ['*'],        // 选择需要显示live2d的页面路由，默认为所有
+      exclude_route: ['/examples/vuepress'] // 在特定页面上不显示Live2D模型
+    })
+  ]
+});
+```
   extends: live2dVitePressPlugin({
     // 是否在所有页面上显示Live2D模型，默认为true
     enable_on_all_pages: true,
