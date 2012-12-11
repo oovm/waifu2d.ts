@@ -1,0 +1,166 @@
+/* 粉红色二次元风格主题 */
+:root {
+  --primary-color: #ff69b4;
+  --secondary-color: #ffb6c1;
+  --accent-color: #ff1493;
+  --background-color: #fff0f5;
+  --text-color: #333333;
+  --link-color: #ff69b4;
+  --link-hover-color: #ff1493;
+  --border-color: #ffb6c1;
+  --box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 导航栏样式 */
+.navbar, .header-inner {
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+}
+
+.navbar a, .header-inner a {
+  color: white !important;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* 链接样式 */
+a {
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
+/* 文章卡片样式 */
+.article, .post, .post-block {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--border-color);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.article:hover, .post:hover, .post-block:hover {
+  transform: translateY(-5px);
+}
+
+/* 按钮样式 */
+.btn, button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover, button:hover {
+  background-color: var(--accent-color);
+}
+
+/* 页脚样式 */
+footer, .footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 3px solid var(--accent-color);
+}
+
+/* 二次元装饰元素 */
+.container:before {
+  content: '❀';
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: var(--accent-color);
+  z-index: 1000;
+}
+
+.container:after {
+  content: '❀';
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: var(--accent-color);
+  z-index: 1000;
+}
+
+/* 分页样式 */
+.pagination {
+  text-align: center;
+}
+
+.pagination a, .page-number {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: white;
+  border-radius: 20px;
+  color: var(--primary-color);
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.pagination a:hover, .pagination .current {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* 代码块样式 */
+pre, code {
+  background-color: #f8e1e7;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* 标签云样式 */
+.tag-cloud a {
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.tag-cloud a:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}

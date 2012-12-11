@@ -1,30 +1,51 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-import { Live2DModelOptions } from '@doki-land/live2d';
+import { Live2dOptions } from '@doki-land/live2d';
 
-export interface Live2DHexoPluginOptions extends Live2DModelOptions {
+export interface HexoPluginLive2D extends Partial<Live2dOptions> {
     /**
-     * Live2D模型文件的目录路径
-     * @default 'source/live2d'
+     * 选择需要显示 live2d 的页面路由, 默认为所有
+     *
+     * 如果设置了此选项，则只有匹配的页面会显示Live2D模型
+     *
+     * @default ['*']
+     *
+     *
      */
-    modelsDir?: string;
+    include_route?: string[];
 
     /**
-     * 是否在移动设备上显示
-     * @default false
+     * 在特定页面上不显示Live2D模型
+     * 如果设置了此选项，则匹配的页面不会显示Live2D模型
      */
-    showOnMobile?: boolean;
+    exclude_route?: string[];
+    /**
+     * 模型文件夹路径
+     * @default 'public/live2d'
+     */
+    models_folder?: string;
+    /**
+     * CDN地址，用于从CDN加载@doki-land/live2d库
+     * @example 'https://unpkg.com/@doki-land/live2d@latest/dist/index.js'
+     */
+    cdn?: string;
 }
 
 /**
  * Hexo插件，用于在Hexo博客中使用Live2D模型
  */
-function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
+function hexoLive2DPlugin(hexo: any, options: HexoPluginLive2D = {}) {
     const {
         modelsDir = 'source/live2d',
         modelOptions = {},
-        showOnMobile = false
+        showOnMobile = false,
+        models = [],
+        position = 'right',
+        spacing_x = 20,
+        spacing_y = 20,
+        auto_motion = true,
+        mouse_tracking = true
     } = options;
 
     // 注册Hexo过滤器，在生成页面时注入Live2D脚本
@@ -50,8 +71,8 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
         const container = document.createElement('div');
         container.id = 'live2d-container';
         container.style.position = 'fixed';
-        container.style.right = '0';
-        container.style.bottom = '0';
+        container.style.${position} = '${spacing_x}px';
+        container.style.bottom = '${spacing_y}px';
         container.style.zIndex = '999';
         document.body.appendChild(container);
         
@@ -62,14 +83,33 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
         canvas.height = ${modelOptions.height || 300};
         container.appendChild(canvas);
         
-        // 加载Live2D模型
-        createLive2DModel({
-          modelPath: '/live2d/model.json',
+        // 添加粉色主题样式
+        const style = document.createElement('style');
+        style.textContent = `
+          #live2d-container {
+            transition: all 0.3s ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.7));
+          }
+          #live2d-container:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.9));
+          }
+        `;
+        document.head.appendChild(style);
+        
+        // 加载Live2D模型 - 从CDN加载模型
+        const modelConfig = {
+          // 优先使用配置中的模型URL，如果没有则使用默认的CDN模型
+          modelPath: ${models.length > 0 ? `'${models[0].model_url}'` : `'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'`},
           elementId: 'live2d-canvas',
           width: ${modelOptions.width || 300},
           height: ${modelOptions.height || 300},
-          autoFit: ${modelOptions.autoFit !== false}
-        }).catch(error => {
+          autoFit: ${modelOptions.autoFit !== false},
+          autoMotion: ${auto_motion},
+          mouseTracking: ${mouse_tracking}
+        };
+        
+        createLive2DModel(modelConfig).catch(error => {
           console.error('Failed to load Live2D model:', error);
         });
       })
@@ -84,32 +124,16 @@ function hexoLive2DPlugin(hexo: any, options: Live2DHexoPluginOptions = {}) {
         return html.replace('</body>', `${live2dScript}</body>`);
     });
 
-    // 复制模型文件到输出目录
+    // 不再复制模型文件到输出目录，因为我们使用CDN加载模型
     hexo.extend.generator.register('live2d', () => {
+        // 如果配置了本地模型目录，则提示用户现在使用CDN加载模型
         const modelsDirPath = path.join(hexo.source_dir, modelsDir);
-
-        // 检查模型目录是否存在
-        if (!fs.existsSync(modelsDirPath)) {
-            hexo.log.warn(`Live2D models directory not found: ${modelsDirPath}`);
-            return [];
+        if (fs.existsSync(modelsDirPath)) {
+            hexo.log.info('Live2D models are now loaded from CDN. Local models directory will be ignored.');
         }
-
-        // 读取模型目录中的所有文件
-        const files = fs.readdirSync(modelsDirPath);
-
-        // 生成静态文件
-        return files.map(file => {
-            const filePath = path.join(modelsDirPath, file);
-            const stat = fs.statSync(filePath);
-
-            if (stat.isFile()) {
-                return {
-                    path: `live2d/${file}`,
-                    data: () => fs.createReadStream(filePath)
-                };
-            }
-            return null;
-        }).filter(Boolean);
+        
+        return [];
+    }
     });
 }
 

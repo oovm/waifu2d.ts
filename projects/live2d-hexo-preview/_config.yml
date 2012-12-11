@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
+title: 萌萌哒Live2D演示
+subtitle: '二次元风格的Live2D展示'
+description: '基于Hexo的Live2D模型展示'
+keywords: live2d, hexo, 二次元
+author: Doki Land
+language: zh-CN
 timezone: ''
 
 # URL
@@ -28,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: [live2d/**/*]
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -48,6 +48,31 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace: ''
+
+# Live2D配置
+live2d:
+  # 不再需要本地模型目录，使用CDN加载模型
+  # 是否在移动设备上显示
+  showOnMobile: true
+  # 模型位置
+  position: 'right'
+  # 边距
+  spacing_x: 30
+  spacing_y: 30
+  # 模型配置 - 使用CDN加载多个模型
+  models:
+    - model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
+    - model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json'
+    - model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json'
+    - model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-miku@1.0.5/assets/miku.model.json'
+  # 模型选项
+  modelOptions:
+    width: 280
+    height: 320
+    autoFit: true
+  # 行为配置
+  auto_motion: true
+  mouse_tracking: true
   wrap: true
   hljs: false
 prismjs:
@@ -97,6 +122,10 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: landscape
+
+# 自定义样式
+stylesheets:
+  - /css/custom.css
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
