@@ -12,7 +12,7 @@ import { minimatch } from 'minimatch';
 
 // 在运行时动态导入，避免编译时的导入问题
 
-export interface Live2dVuePressOptions extends Partial<Live2dOptions> {
+export interface VuePressPluginLive2D extends Partial<Live2dOptions> {
     /**
      * 选择需要显示 live2d 的页面路由, 默认为所有
      *
@@ -44,7 +44,7 @@ export interface Live2dVuePressOptions extends Partial<Live2dOptions> {
  * @param options 插件配置选项
  * @returns VuePress插件
  */
-export function live2dVuePressPlugin(options: Live2dVuePressOptions): Plugin {
+export function live2dVuePressPlugin(options: VuePressPluginLive2D): Plugin {
     const {
         element_id = 'live2d-canvas',
         models,
