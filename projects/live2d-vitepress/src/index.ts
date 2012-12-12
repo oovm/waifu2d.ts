@@ -1,71 +1,22 @@
 import type { Plugin } from 'vitepress';
-import type  {  Live2dOptions } from '@doki-land/live2d';
-import { minimatch } from 'minimatch';
-
-/**
- * 检查当前路径是否应该显示Live2D模型
- * @param currentPath 当前路径
- * @param includePaths 仅在特定页面上显示
- * @param excludePaths 在特定页面上不显示
- * @returns 是否应该显示Live2D模型
- */
-
-// 在运行时动态导入，避免编译时的导入问题
-
-export interface Live2dVitePressOptions extends Partial<Live2dOptions> {
-    /**
-     * 选择需要显示 live2d 的页面路由, 默认为所有
-     *
-     * 如果设置了此选项，则只有匹配的页面会显示Live2D模型
-     *
-     * @default ['*']
-     *
-     *
-     */
-    include_route?: string[];
-
-    /**
-     * 在特定页面上不显示Live2D模型
-     * 如果设置了此选项，则匹配的页面不会显示Live2D模型
-     */
-    exclude_route?: string[];
-    /**
-     * 模型文件夹路径
-     * @default 'public/live2d'
-     */
-    models_folder?: string;
-    /**
-     * CDN地址，用于从CDN加载@doki-land/live2d库
-     * @example 'https://unpkg.com/@doki-land/live2d@latest/dist/index.js'
-     */
-    cdn?: string;
-}
+import { generateCdn, generateElementId, generateModelList } from './helpers';
+import { allowShowLive2D } from '@doki-land/live2d/src/fs';
+import { VitePressPluginLive2D } from './types';
 
 /**
  * VitePress插件，用于在VitePress文档中使用Live2D模型
  * @param options 插件配置选项
  * @returns VitePress主题和Vite插件
  */
-export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
-    const {
-        element_id = 'live2d-canvas',
-        models,
-        models_folder = 'public/live2d',
-        include_route = [
-            '*'
-        ],
-        exclude_route = []
-    } = options;
+export function live2dVitePressPlugin(options: VitePressPluginLive2D): Plugin {
+    const elementId = generateElementId(options)
+    const models = generateModelList(options)
+    const cdn = generateCdn(options)
 
-    delete options.element_id;
-
-    if (models == undefined || models.length == 0) {
-        throw new Error('At least one live2d model is required');
-    }
-    delete options.models;
-
-    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.esm.js';
-    delete options.cdn;
+    // @ts-ignore
+    const _showLive2D = allowShowLive2D(options.element_id || '', options.include_route || ['*'], options.exclude_route || [])
+    delete options.include_route;
+    delete options.exclude_route;
 
     // 创建并返回Vite插件
     return {
@@ -83,10 +34,10 @@ export function live2dVitePressPlugin(options: Live2dVitePressOptions): Plugin {
         },
         transformIndexHtml(html) {
             const injectScript = `<script type="module">
-const { createLive2D, initializeLive2D } = await import('${cdn}');
+const { createLive2D, initializeLive2D } = await import(${JSON.stringify(cdn)});
 initializeLive2D()
 await createLive2D({
-    element_id: ${JSON.stringify(element_id)},
+    element_id: ${JSON.stringify(elementId)},
     models: ${JSON.stringify(models)},
     ...${JSON.stringify(options)},
 });
@@ -97,7 +48,5 @@ await createLive2D({
         }
     };
 }
-
-
 
 export default live2dVitePressPlugin;
