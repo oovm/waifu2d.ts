@@ -1,20 +1,19 @@
 import '../lib/cubism2.min.js';
 import '../lib/cubism5.min.js';
 import * as PIXI from 'pixi.js';
-import { Live2dOptions } from './types';
+
 import { Ticker, TickerPlugin } from '@pixi/ticker';
 import {
-    Live2DFactory,
     Live2DModel,
     MotionManager,
     SoundManager
 } from 'pixi-live2d-display-lipsyncpatch';
 import { Application,  } from 'pixi.js';
-import { icons } from './icons/icons';
 import './icons/style.css';
+import { Live2dOptions } from '@/types/index.js';
 
-
-export { MotionManager, SoundManager, Live2DModel, PIXI, type Live2dOptions };
+export { MotionManager, SoundManager, Live2DModel, PIXI };
+export * from '@/types/index.js';
 
 /**
  * 创建Live2D模型
@@ -79,7 +78,7 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
     }
     
     // 创建右侧图标栏
-    createIconPanel(model, element);
+    // createIconPanel(model, element);
 
     return model;
 }

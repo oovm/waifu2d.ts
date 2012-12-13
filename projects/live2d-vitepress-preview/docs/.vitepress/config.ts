@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress';
-import { live2dVitePressPlugin } from '@doki-land/live2d-vitepress';
+import { vitePressLive2D } from '@doki-land/live2d-vitepress';
 import { ModelOptions } from '@doki-land/live2d-vitepress';
 
 const models:  ModelOptions[] = [
@@ -93,7 +93,7 @@ export default defineConfig({
     },
     vite: {
         plugins: [
-            live2dVitePressPlugin({
+            vitePressLive2D({
                 cdn: '/l2d.esm.js',
                 models
             })

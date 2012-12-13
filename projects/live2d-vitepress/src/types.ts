@@ -6,6 +6,7 @@
  * @returns 是否应该显示Live2D模型
  */
 import type { Live2dOptions } from '@doki-land/live2d';
+export type { ModelOptions } from '@doki-land/live2d';
 
 // 在运行时动态导入，避免编译时的导入问题
 

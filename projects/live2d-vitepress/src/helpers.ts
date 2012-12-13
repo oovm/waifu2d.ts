@@ -1,6 +1,6 @@
-import { findAllModels, mergeModels } from '@doki-land/live2d/src/fs';
+import { findAllModels, mergeModels } from '@doki-land/live2d/fs';
 
-import { VitePressPluginLive2D } from './types';
+import { VitePressPluginLive2D } from './types.js';
 
 export function generateModelList(options: VitePressPluginLive2D) {
     const models = mergeModels(options.domain || 'https://localhost:8080', findAllModels(options.models_folder || 'public/live2d'), options.models || []);

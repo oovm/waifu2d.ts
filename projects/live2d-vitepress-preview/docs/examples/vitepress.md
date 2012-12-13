@@ -104,7 +104,7 @@ public/
 通过`enableOnAllPages`、`includePaths`和`excludePaths`选项，您可以控制在哪些页面显示Live2D模型：
 
 ```js
-live2dVitePressPlugin({
+vitePressLive2D({
   // 在所有页面上显示
   enableOnAllPages: true,
   
@@ -121,7 +121,7 @@ live2dVitePressPlugin({
 通过`modelOptions`选项，您可以自定义模型的显示样式：
 
 ```js
-live2dVitePressPlugin({
+vitePressLive2D({
   modelOptions: {
     width: 280,            // 画布宽度
     height: 320,           // 画布高度

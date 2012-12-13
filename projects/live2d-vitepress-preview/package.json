@@ -1,5 +1,5 @@
 {
-    "name": "@doki-land/live2d-document",
+    "name": "vitepress-template",
     "private": true,
     "version": "1.0.0",
     "description": "Documentation for Live2D TypeScript runtime",

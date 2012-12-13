@@ -1,14 +1,18 @@
 import type { Plugin } from 'vitepress';
-import { generateCdn, generateElementId, generateModelList } from './helpers';
-import { allowShowLive2D } from '@doki-land/live2d/src/fs';
-import { VitePressPluginLive2D } from './types';
+import { generateCdn, generateElementId, generateModelList } from './helpers.js';
+import { allowShowLive2D } from '@doki-land/live2d/fs';
+import { VitePressPluginLive2D } from './types.js';
+
+export * from "./types.js";
+export * from "./helpers.js";
+
 
 /**
  * VitePress插件，用于在VitePress文档中使用Live2D模型
  * @param options 插件配置选项
  * @returns VitePress主题和Vite插件
  */
-export function live2dVitePressPlugin(options: VitePressPluginLive2D): Plugin {
+export function vitePressLive2D(options: VitePressPluginLive2D): Plugin {
     const elementId = generateElementId(options)
     const models = generateModelList(options)
     const cdn = generateCdn(options)
@@ -30,7 +34,6 @@ export function live2dVitePressPlugin(options: VitePressPluginLive2D): Plugin {
         },
         transform() {
             console.log();
-
         },
         transformIndexHtml(html) {
             const injectScript = `<script type="module">
@@ -49,4 +52,4 @@ await createLive2D({
     };
 }
 
-export default live2dVitePressPlugin;
+export default vitePressLive2D;
