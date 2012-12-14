@@ -3,7 +3,8 @@ import { generateCdn, generateElementId, generateModelList } from './helpers.js'
 import { allowShowLive2D } from '@doki-land/live2d/fs';
 import { VitePressPluginLive2D } from './types.js';
 
-export * from "./types.js";
+export type { ModelOptions } from '@doki-land/live2d/types';
+export * from "./types.js"
 export * from "./helpers.js";
 
 

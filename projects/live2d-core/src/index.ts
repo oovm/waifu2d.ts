@@ -13,7 +13,6 @@ import './icons/style.css';
 import { Live2dOptions } from '@/types/index.js';
 
 export { MotionManager, SoundManager, Live2DModel, PIXI };
-export * from '@/types/index.js';
 
 /**
  * 创建Live2D模型

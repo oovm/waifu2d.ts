@@ -1,7 +1,7 @@
 import { minimatch } from 'minimatch';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { ModelOptions } from '@/types';
+import { ModelOptions } from '@/types/index.js';
 
 /**
  * 判断根据当前路径和指定的包含/排除规则，是否允许显示 Live2D 功能。

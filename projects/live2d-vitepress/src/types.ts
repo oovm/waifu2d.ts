@@ -1,12 +1,5 @@
-/**
- * 检查当前路径是否应该显示Live2D模型
- * @param currentPath 当前路径
- * @param includePaths 仅在特定页面上显示
- * @param excludePaths 在特定页面上不显示
- * @returns 是否应该显示Live2D模型
- */
-import type { Live2dOptions } from '@doki-land/live2d';
-export type { ModelOptions } from '@doki-land/live2d';
+import  { Live2dOptions } from '@doki-land/live2d/types';
+
 
 // 在运行时动态导入，避免编译时的导入问题
 
