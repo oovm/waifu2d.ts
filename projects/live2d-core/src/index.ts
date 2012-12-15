@@ -184,7 +184,7 @@ async function startIdleAnimation(model: Live2DModel) {
  * @param cubism2 可选的CubismCore对象，如果在非浏览器环境中使用，需要传入
  * @param cubism5
  */
-export async function initializeLive2D(cubism2?: any, cubism5?: any) {
+export async function initializeLive2D() {
     // 首先初始化 Cubism2 SDK
     // console.log('sdk2:', Cubism2);
     // console.log('sdk5:', Cubism5);

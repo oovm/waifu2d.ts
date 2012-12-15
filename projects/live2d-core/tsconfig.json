@@ -1,24 +1,8 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "target": "ES2020",
         "useDefineForClassFields": true,
-
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
-        "skipLibCheck": true,
-
-        /* Bundler mode */
-        "module": "Node16",
-        "moduleResolution": "node16",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "declaration": true,
-        "declarationDir": "./dist",
-        "sourceMap": true,
-        "declarationMap": true,
-
         /* Linting */
-        "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,

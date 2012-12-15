@@ -1,16 +1,13 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+// import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
     plugins: [
-        nodePolyfills({
-            // To exclude specific polyfills, add them to this list.
-            exclude: [
-            ],
-            // Whether to polyfill `node:` protocol imports.
-            protocolImports: true,
-        }),
+        // nodePolyfills({
+        //     exclude: [            ],
+        //     protocolImports: true,
+        // }),
     ],
     esbuild: {
         sourcemap: true,
