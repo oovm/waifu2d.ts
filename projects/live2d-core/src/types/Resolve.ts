@@ -1,4 +1,4 @@
-import {ModelOptions} from "@/types/ModelOptions.ts";
+import {ModelOptions} from "./ModelOptions.ts";
 
 
 export type ResolveModels = {

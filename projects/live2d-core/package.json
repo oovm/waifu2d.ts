@@ -1,6 +1,6 @@
 {
     "name": "@doki-land/live2d",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "keywords": [
         "live2d",
         "pixi",
@@ -16,17 +16,9 @@
             "import": "./src/index.ts",
             "require": "./dist/l2d.umd.js"
         },
-        "./types": {
-            "types": "./src/types/index.ts",
-            "import": "./src/types/index.ts"
-        },
-        "./helper": {
-            "types": "./src/helper/index.ts",
-            "import": "./src/helper/index.ts"
-        },
-        "./fs": {
-            "types": "./src/fs/index.ts",
-            "import": "./src/fs/index.ts"
+        "./*": {
+            "types": "./src/*/index.ts",
+            "import": "./src/*/index.ts"
         }
     },
     "files": [

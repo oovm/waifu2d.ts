@@ -1,5 +1,5 @@
-import {findAllModels, mergeModels} from "@/fs/index.ts";
-import {ResolveCdn, ResolveElementId, ResolveModels} from "@/types/index.ts";
+import {findAllModels, mergeModels} from "@doki-land/live2d/fs";
+import {ResolveCdn, ResolveElementId, ResolveModels} from "@doki-land/live2d/types";
 
 export function generateModelList(options: ResolveModels) {
     const models = mergeModels(options.domain || 'https://localhost:8080', findAllModels(options.models_folder || 'public/live2d'), options.models || []);

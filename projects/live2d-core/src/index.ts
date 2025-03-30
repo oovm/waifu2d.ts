@@ -5,7 +5,7 @@ import {Application} from 'pixi.js';
 import {Ticker} from '@pixi/ticker';
 import {Live2DModel, MotionManager, SoundManager} from 'pixi-live2d-display-lipsyncpatch';
 import './icons/style.css';
-import {Live2dOptions} from '@/types/index.ts';
+import {Live2dOptions} from '@doki-land/live2d/types';
 
 export {MotionManager, SoundManager, Live2DModel, PIXI};
 
