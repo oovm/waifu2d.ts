@@ -1,5 +1,6 @@
 # Live2D for VitePress (Unofficial)
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a5e29106-8659-44bc-a57e-5ebc4c0ca9ab/deploy-status)](https://live2d-vitepress.netlify.app/)
+[![NPM Version](https://img.shields.io/npm/v/%40doki-land%2Flive2d-vitepress)](https://www.npmjs.com/package/@doki-land/live2d-vitepress)
 
 ## Usage
 This package provides Live2D model integration for VitePress documentation sites. It allows you to easily add interactive Live2D characters to your VitePress project.
