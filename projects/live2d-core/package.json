@@ -16,13 +16,17 @@
             "require": "./dist/l2d.umd.js",
             "import": "./src/index.ts"
         },
-        "./fs": {
-            "types": "./src/fs/index.ts",
-            "import": "./src/fs/index.ts"
-        },
         "./types": {
             "types": "./src/types/index.ts",
             "import": "./src/types/index.ts"
+        },
+        "./helper": {
+            "types": "./src/helper/index.ts",
+            "import": "./src/helper/index.ts"
+        },
+        "./fs": {
+            "types": "./src/fs/index.ts",
+            "import": "./src/fs/index.ts"
         }
     },
     "files": [

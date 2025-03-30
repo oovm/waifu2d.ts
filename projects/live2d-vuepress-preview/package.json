@@ -1,20 +1,15 @@
 {
-    "name": "@doki-land/live2d-document",
+    "name": "vuepress-template",
     "private": true,
-    "version": "1.0.0",
-    "description": "Documentation for Live2D TypeScript runtime",
     "type": "module",
     "scripts": {
         "dev": "vitepress dev docs",
         "build": "vitepress build docs",
         "preview": "vitepress preview docs"
     },
-    "keywords": ["live2d", "documentation"],
-    "author": "",
-    "license": "LGPL-3.0-or-later",
     "dependencies": {
-        "vitepress": "^1.6.3",
-        "@doki-land/live2d": "workspace:*",
-        "@doki-land/live2d-vitepress": "workspace:*"
+        "@doki-land/live2d-vuepress": "workspace:*",
+        "@vuepress/bundler-vite": "2.0.0-rc.20",
+        "vuepress": "^2.0.0-rc.20"
     }
 }
