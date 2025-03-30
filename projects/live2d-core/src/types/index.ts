@@ -1,3 +1,3 @@
-export  * from './Live2dOptions.js';
-export  * from './ModelOptions.js';
-export  * from './Resolve.js';
+export  * from './Live2dOptions.ts';
+export  * from './ModelOptions.ts';
+export  * from './Resolve.ts';

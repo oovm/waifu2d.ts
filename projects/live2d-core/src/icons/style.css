@@ -36,3 +36,9 @@
     height: 24px;
     fill: #666;
 }
+
+.live2d-canvas {
+    position: absolute;
+    z-index: 9999;
+    display: block;
+}

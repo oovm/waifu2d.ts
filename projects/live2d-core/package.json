@@ -1,20 +1,20 @@
 {
     "name": "@doki-land/live2d",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "keywords": [
         "live2d",
         "pixi",
         "typescript"
     ],
-    "description": "Live2D TypeScript runtime based on pixi-live2d-display",
+    "description": "Live2D TypeScript runtime based on pixi",
     "author": "Aster <192608617@qq.com>",
     "license": "LGPL-3.0-or-later",
     "type": "module",
     "exports": {
         ".": {
             "types": "./src/index.ts",
-            "require": "./dist/l2d.umd.js",
-            "import": "./src/index.ts"
+            "import": "./src/index.ts",
+            "require": "./dist/l2d.umd.js"
         },
         "./types": {
             "types": "./src/types/index.ts",

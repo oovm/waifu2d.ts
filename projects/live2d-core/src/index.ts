@@ -1,16 +1,11 @@
 import '../lib/cubism2.min.js';
 import '../lib/cubism5.min.js';
 import * as PIXI from 'pixi.js';
-
-import { Ticker, TickerPlugin } from '@pixi/ticker';
-import {
-    Live2DModel,
-    MotionManager,
-    SoundManager
-} from 'pixi-live2d-display-lipsyncpatch';
-import { Application,  } from 'pixi.js';
+import {Application} from 'pixi.js';
+import {Ticker} from '@pixi/ticker';
+import {Live2DModel, MotionManager, SoundManager} from 'pixi-live2d-display-lipsyncpatch';
 import './icons/style.css';
-import { Live2dOptions } from '@/types/index.js';
+import {Live2dOptions} from '@/types/index.ts';
 
 export {MotionManager, SoundManager, Live2DModel, PIXI};
 
@@ -50,7 +45,7 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
     });
 
     // 加载模型
-    const model = await Live2DModel.from(models[0].model_url,  {
+    const model = await Live2DModel.from(models[0].model_url, {
         ticker: Ticker.system,
     });
     // 添加模型到舞台
@@ -76,7 +71,7 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
     if (auto_motion) {
         await startIdleAnimation(model);
     }
-    
+
     // 创建右侧图标栏
     // createIconPanel(model, element);
 
@@ -88,15 +83,10 @@ function findOrCreateCanvas(id: string, options: Live2dOptions): HTMLCanvasEleme
     if (!canvas) {
         canvas = document.createElement('canvas');
         canvas.id = id;
-        document.body.appendChild(canvas);
-        canvas.style.display = 'none';
-        canvas.style.position = 'fixed';
-        // 设置画布样式
-        canvas.style.display = 'block';
-        canvas.style.position = 'absolute';
+        canvas.classList.add('live2d-canvas')
         canvas.style.bottom = `${options.spacing_y || 0}px`;
         canvas.style[options.position === 'left' ? 'left' : 'right'] = `${options.spacing_x || 0}px`;
-        canvas.style.zIndex = '9999';
+        document.body.appendChild(canvas);
     }
     return canvas;
 }
@@ -124,7 +114,7 @@ function enableMouseTracking(model: Live2DModel, canvas: any) {
             model.internalModel.focusController?.focus(mouseX, mouseY);
         }
     });
-    
+
     // 添加点击模型触发动作的交互
     canvas.addEventListener('click', () => {
         // 尝试播放tap_body动作，如果没有则尝试其他可用动作

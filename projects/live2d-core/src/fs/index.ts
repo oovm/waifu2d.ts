@@ -1,5 +1,5 @@
 import { minimatch } from 'minimatch';
-import { ModelOptions } from '@/types/index.js';
+import { ModelOptions } from '@/types/index.ts';
 import path from 'node:path';
 import fs from 'node:fs';
 

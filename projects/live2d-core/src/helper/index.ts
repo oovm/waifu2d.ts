@@ -1,5 +1,5 @@
-import {findAllModels, mergeModels} from "@/fs/index.js";
-import {ResolveCdn, ResolveElementId, ResolveModels} from "@/types/index.js";
+import {findAllModels, mergeModels} from "@/fs/index.ts";
+import {ResolveCdn, ResolveElementId, ResolveModels} from "@/types/index.ts";
 
 export function generateModelList(options: ResolveModels) {
     const models = mergeModels(options.domain || 'https://localhost:8080', findAllModels(options.models_folder || 'public/live2d'), options.models || []);
