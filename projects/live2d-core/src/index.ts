@@ -50,8 +50,9 @@ export async function createLive2D(options: Live2dOptions): Promise<Live2DModel>
     });
 
     // 加载模型
-    const model = await Live2DModel.from(models[0].model_url);
-
+    const model = await Live2DModel.from(models[0].model_url,  {
+        ticker: Ticker.system,
+    });
     // 添加模型到舞台
     app.stage.addChild(model);
 
@@ -194,11 +195,6 @@ export async function initializeLive2D() {
     // @ts-ignore
     // window.Live2DCubismCore = cubism5 || Cubism5().Live2DCubismCore;
 
-    // 最后初始化 PIXI 相关功能
-    // 为 Live2DModel 注册 Ticker
-    Live2DModel.registerTicker(Ticker);
-    // 为 Application 注册 Ticker
-    PIXI.extensions.add(TickerPlugin);
     // 注册 InteractionManager 以支持 Live2D 模型的自动交互
     // PIXI.extensions.add(InteractionManager);
 }

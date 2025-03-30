@@ -37,10 +37,10 @@ export function vitePressLive2D(options: VitePressPluginLive2D): Plugin {
             console.log();
         },
         transformIndexHtml(html) {
-            const injectScript = `<script type="module">
-const { createLive2D, initializeLive2D } = await import(${JSON.stringify(cdn)});
-initializeLive2D()
-await createLive2D({
+            const injectScript = `<script defer src=${JSON.stringify(cdn)}>
+l2d.initializeLive2D()
+console.log("加载完成")
+l2d.createLive2D({
     element_id: ${JSON.stringify(elementId)},
     models: ${JSON.stringify(models)},
     ...${JSON.stringify(options)},

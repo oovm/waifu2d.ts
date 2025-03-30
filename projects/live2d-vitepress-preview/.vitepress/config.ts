@@ -1,12 +1,6 @@
 import { defineConfig } from 'vitepress';
 import {vitePressLive2D} from "@doki-land/live2d-vitepress";
 
-const models = [
-    {
-        model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
-    }
-]
-
 export default defineConfig({
     title: 'Live2D PIXI Runtime',
     description: '基于 pixi.js 的 Live2D TypeScript 运行库',
@@ -93,21 +87,20 @@ export default defineConfig({
     vite: {
         plugins: [
             vitePressLive2D({
-                cdn: '/l2d.esm.js',
-                models
+                // cdn: '/l2d.umd.js',
+                models:[
+                    {
+                        model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
+                    }
+                ]
             })
         ],
         server: {
             host: '0.0.0.0',
-            port: 9999,
+            port: 5173,
             fs: {
                 allow: ['../']
             }
         },
-        resolve: {
-            alias: {
-                '/l2d.esm.js': '../../live2d-core/dist/l2d.esm.js'
-            }
-        }
     }
 });

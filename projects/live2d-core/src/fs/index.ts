@@ -76,14 +76,16 @@ export function findAllModels(folder: string, depth: number = 99): string[] {
  *
  * 本地模型的优先级更高, 本地模型根据自然序(Natural Sort)排列
  */
-export function mergeModels(base: string, local: string[], remote: ModelOptions[]): string[] {
-    const models: string[] = [];
+export function mergeModels(base: string, local: string[], remote: ModelOptions[]): ModelOptions[] {
+    const models: ModelOptions[] = [];
     const url = new URL(base);
     for (const model of local) {
-        models.push(new URL(model, url).href);
+        models.push({
+            model_url: new URL(model, url).href,
+        });
     }
     for (const model of remote) {
-        models.push(model.model_url);
+        models.push(model);
     }
     return models
 }

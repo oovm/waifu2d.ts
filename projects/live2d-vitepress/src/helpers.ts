@@ -20,7 +20,7 @@ export function generateElementId(options: VitePressPluginLive2D) {
 }
 
 export function generateCdn(options: VitePressPluginLive2D) {
-    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.esm.js';
+    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.umd.js';
     delete options.cdn;
     return cdn
 }

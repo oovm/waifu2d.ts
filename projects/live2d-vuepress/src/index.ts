@@ -62,7 +62,7 @@ export function live2dVuePressPlugin(options: VuePressPluginLive2D): Plugin {
     }
     delete options.models;
 
-    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.esm.js';
+    const cdn = options.cdn || 'https://cdn.jsdelivr.net/npm/@doki-land/live2d@latest/dist/l2d.umd.js';
     delete options.cdn;
 
     // 创建并返回VuePress插件
