@@ -5,9 +5,9 @@
     "description": "Documentation for Live2D TypeScript runtime",
     "type": "module",
     "scripts": {
-        "dev": "vitepress dev docs",
-        "build": "vitepress build docs",
-        "preview": "vitepress preview docs"
+        "dev": "vitepress dev .",
+        "build": "vitepress build .",
+        "preview": "vitepress preview ."
     },
     "keywords": ["live2d", "documentation"],
     "author": "",

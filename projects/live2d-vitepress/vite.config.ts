@@ -22,9 +22,9 @@ export default defineConfig({
         rollupOptions: {
             output: [
                 {
+                    name: 'VitePressLive2D',
                     entryFileNames: 'index.js',
-                    format: 'es',
-                    preserveModules: false,
+                    format: 'umd',
                     compact: true
                 }
             ]

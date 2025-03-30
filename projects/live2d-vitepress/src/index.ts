@@ -52,5 +52,3 @@ await createLive2D({
         }
     };
 }
-
-export default vitePressLive2D;

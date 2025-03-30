@@ -1,5 +1,5 @@
 import type { Plugin } from 'vuepress';
-import type  {  Live2dOptions } from '@doki-land/live2d';
+import type  {  Live2dOptions } from '@doki-land/live2d/types';
 import { minimatch } from 'minimatch';
 
 /**

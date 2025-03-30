@@ -12,7 +12,7 @@ import { Application,  } from 'pixi.js';
 import './icons/style.css';
 import { Live2dOptions } from '@/types/index.js';
 
-export { MotionManager, SoundManager, Live2DModel, PIXI };
+export {MotionManager, SoundManager, Live2DModel, PIXI};
 
 /**
  * 创建Live2D模型
