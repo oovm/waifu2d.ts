@@ -1,16 +1,21 @@
 {
     "name": "@doki-land/live2d-vuepress",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "keywords": ["live2d", "vuepress", "plugin"],
     "description": "VuePress plugin for Live2D models",
     "author": "Aster <192608617@qq.com>",
     "license": "LGPL-3.0-or-later",
     "type": "module",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+                "types": "./src/index.ts",
+                "require": "./dist/index.js",
+                "import": "./dist/index.js"
+        }
+    },
     "files": [
-        "dist"
+        "dist",
+        "src"
     ],
     "scripts": {
         "dev": "tsc --watch",
@@ -20,7 +25,10 @@
     "dependencies": {
         "@doki-land/live2d": "workspace:*"
     },
+    "devDependencies": {
+        "vuepress": "^2.0.0-rc.20"
+    },
     "peerDependencies": {
-        "vuepress": "^1.9.0"
+        "vuepress": "^2.0.0-rc.20"
     }
 }

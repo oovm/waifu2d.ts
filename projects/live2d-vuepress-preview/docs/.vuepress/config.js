@@ -1,5 +1,5 @@
 import { defineConfig } from 'vuepress';
-import { live2dVuePressPlugin } from '../../../live2d-vuepress/src';
+import { vuePressLive2D } from '../../../live2d-vuepress/src';
 
 export default defineConfig({
   title: 'Live2D TypeScript Runtime',
@@ -67,7 +67,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    live2dVuePressPlugin({
+    vuePressLive2D({
       // 模型配置
       models: [
         {
