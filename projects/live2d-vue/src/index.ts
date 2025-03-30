@@ -2,6 +2,7 @@ import type { Plugin, ResolvedConfig } from 'vite';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Live2dOptions } from '@doki-land/live2d';
+import Live2DCanvas from './Live2DCanvas.vue';
 
 export interface Live2DVitePluginOptions extends Live2dOptions {
     /**
@@ -28,6 +29,8 @@ export interface Live2DVitePluginOptions extends Live2dOptions {
  * @param options 插件配置选项
  * @returns Vite插件
  */
+export { Live2DCanvas };
+
 export default function live2dVitePlugin(options: Live2DVitePluginOptions = {}): Plugin {
     const {
         modelsDir = 'public/live2d',

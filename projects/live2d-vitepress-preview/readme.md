@@ -1,5 +1,8 @@
 # Live2D VitePress Template
 
+## Disclaimer
+This is an unofficial project and is not affiliated with or endorsed by Live2D Inc.
+
 ## Overview
 This project demonstrates how to integrate Live2D models into a VitePress documentation site. It serves as a reference implementation and preview environment for the `@doki-land/live2d-vitepress` package.
 

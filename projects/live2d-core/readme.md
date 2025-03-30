@@ -1,10 +1,11 @@
-# Live2D Core Adapter
+# Live2D Core Adapter (Unofficial)
 
-This is the core library for rendering Live2D models in web applications. 
+## Usage
+
+This is the core library for rendering Live2D models in web applications.
 
 It provides essential functionalities to load and display Live2D models with interactive capabilities.
 
-## Usage
 
 
 ### In HTML via Module
