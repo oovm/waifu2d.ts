@@ -1,15 +1,17 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-// import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
     plugins: [
         // nodePolyfills({
-        //     exclude: [            ],
+        //     include:['path', 'fs'],
+        //     exclude: [         ],
         //     protocolImports: true,
         // }),
     ],
     esbuild: {
+        target: "node12",
         sourcemap: true,
         legalComments: 'none',
     },
@@ -20,11 +22,11 @@ export default defineConfig({
         minify: 'esbuild',
         sourcemap: true,
         rollupOptions: {
+            external: ["node:fs", "node:path"],
             output: [
                 {
-                    name: 'VitePressLive2D',
                     entryFileNames: 'index.js',
-                    format: 'umd',
+                    format: 'es',
                     compact: true
                 }
             ]

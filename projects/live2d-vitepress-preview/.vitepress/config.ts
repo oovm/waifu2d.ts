@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitepress';
-import { vitePressLive2D } from '@doki-land/live2d-vitepress';
-import { ModelOptions } from '@doki-land/live2d-vitepress';
+import {vitePressLive2D} from "@doki-land/live2d-vitepress";
 
-const models:  ModelOptions[] = [
+const models = [
     {
         model_url: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json'
     }

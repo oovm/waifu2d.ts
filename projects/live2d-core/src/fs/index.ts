@@ -45,17 +45,20 @@ export function allowShowLive2D(currentPath: string, includePaths: string[], exc
  */
 export function findAllModels(folder: string, depth: number = 99): string[] {
     const models: string[] = [];
-    for (const file of fs.readdirSync(folder)) {
-        const filePath = path.join(folder, file);
-        const stat = fs.statSync(filePath);
-        if (stat.isDirectory()) {
-            if (depth > 0) {
-                models.push(...findAllModels(filePath, depth - 1));
+    if (fs.existsSync(folder)) {
+        for (const file of fs.readdirSync(folder)) {
+            const filePath = path.join(folder, file);
+            const stat = fs.statSync(filePath);
+            if (stat.isDirectory()) {
+                if (depth > 0) {
+                    models.push(...findAllModels(filePath, depth - 1));
+                }
+            } else if (file.endsWith('.model.json') || file.endsWith('.model3.json')) {
+                models.push(filePath);
             }
-        } else if (file.endsWith('.model.json') || file.endsWith('.model3.json')) {
-            models.push(filePath);
         }
-   }
+    }
+
     return models;
 }
 

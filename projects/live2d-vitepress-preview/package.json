@@ -9,12 +9,13 @@
         "build": "vitepress build .",
         "preview": "vitepress preview ."
     },
-    "keywords": ["live2d", "documentation"],
+    "keywords": [
+        "live2d",
+        "documentation"
+    ],
     "author": "",
     "license": "LGPL-3.0-or-later",
     "dependencies": {
-        "vitepress": "^1.6.3",
-        "@doki-land/live2d": "workspace:*",
         "@doki-land/live2d-vitepress": "workspace:*"
     }
 }
